@@ -26,6 +26,11 @@ body {
 .navbar-brand {
   display: flex;
   padding-left: 1rem;
+  font-size: large;
+}
+
+#navbar-logo {
+  height: 60%;
 }
 
 .navbar-brand .navbar-item:first-child,
