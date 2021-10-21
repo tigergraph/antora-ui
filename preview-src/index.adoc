@@ -1,4 +1,4 @@
-= Hardware and Software Requirements
+= Antora Default UI
 Author Name
 :idprefix:
 :idseparator: -
@@ -279,6 +279,38 @@ The fog comes
 on little cat feet.
 ____
 
-== Fin
+== Tabs
 
+++++
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_title-a"></a>Title A</p>
+</li>
+<li>
+<p><a id="tabset1_title-b"></a>Title B</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_title-a">
+<div class="listingblock">
+<div class="content">
+<pre>$ tar -xzf tigergraph-&lt;version&gt;.tar.gz</pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_title-b">
+<div class="listingblock">
+<div class="content">
+<pre>$ gadmin status</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+++++
+
+== Fin
 That's all, folks!
