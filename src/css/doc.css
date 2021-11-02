@@ -350,6 +350,8 @@ h1.page + aside.toc.embedded {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
+  box-shadow: 0 8px 16px 0 rgb(14 30 37 / 12%);
+  border-radius: 0.5rem;
 }
 
 .doc .image:not(.left):not(.right) > img {
@@ -853,8 +855,8 @@ h1.page + aside.toc.embedded {
 
 .tabset.is-loading .tabs li:not(:first-child),
 .tabset:not(.is-loading) .tabs li:not(.is-active) {
-  background-color: black;
-  color: white;
+  background-color: #4a4a4a;
+  color: #fff;
 }
 
 .tabset.is-loading .tabs li:first-child::after,
