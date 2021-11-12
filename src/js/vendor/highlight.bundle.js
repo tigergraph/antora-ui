@@ -1,3 +1,7 @@
+// var path = require('path');
+// var filePath = path.join('..', '..', 'highlight-gsql', 'gsql.js');
+// console.log(filePath);
+
 ;(function () {
   'use strict'
 

@@ -185,6 +185,10 @@ html.is-clipped--nav {
   height: var(--drawer-height);
 }
 
+.nav-panel-explore .context .title {
+  width: 11rem;
+}
+
 .nav-panel-explore .context .version {
   display: flex;
   align-items: inherit;

@@ -256,6 +256,35 @@ image::multirepo-ssg.svg[Multirepo SSG,250]
 
 Make the switch today!
 
+== GSQL highlighting
+[source,gsql]
+----
+CREATE QUERY pageRankDyn (FLOAT maxChange=0.00, INT maxIter=25,
+  FLOAT damping=0.85,
+  STRING vType, STRING eType, STRING attr)  //parameterized schema
+//no graph name
+{
+  MaxAccum<float> @@maxDiff = 9999; 
+  SumAccum<float> @rcvd_score = 0; 
+  SumAccum<float> @score = 1; 
+
+  Start = {vType};
+  WHILE @@maxDiff > maxChange LIMIT maxIter DO
+      @@maxDiff = 0;
+      V = SELECT s
+          FROM Start:s -(eType:e)- vType:t //parameterized
+          ACCUM t.@rcvd_score += s.@score/(s.outdegree(eType)) //param
+          POST-ACCUM s.@score = (1.0-damping) + damping * s.@rcvd_score,
+                      s.@rcvd_score = 0,
+                      @@maxDiff += abs(s.@score - s.@score);
+  END;
+
+  V = SELECT s FROM Start:s
+      POST-ACCUM s.setAttr(attr, s.@score); //parameterized
+}
+RUN QUERY pageRankDyn(_,_,_,"Page", "Link", "Score")
+----
+
 [#english+中文]
 == English + 中文
 
