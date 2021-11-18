@@ -3,3 +3,7 @@
 <meta property="og:image" href="{{{uiRootPath}}}/img/og-image.png" content="https://i.ibb.co/YN7dBMg/og-image.png">
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.tigergraph.com{{ page.url }}">
+{{#with (or page.description "Develop your application and scale your analytics with the power of graph."}}
+    <meta property="og:description" content="{{this}}">
+{{/with}}
+  <meta property="og:site_name" content="TigerGraph Documentation" />
