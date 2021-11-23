@@ -69,6 +69,10 @@ h1.page + aside.toc.embedded {
   font-weight: var(--alt-heading-font-weight);
 }
 
+.doc h4:not(.discrete) {
+  font-weight: 500;
+}
+
 .doc h1 .anchor,
 .doc h2 .anchor,
 .doc h3 .anchor,
