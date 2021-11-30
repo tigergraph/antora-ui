@@ -39,6 +39,54 @@
   hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'))
   hljs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'))
   hljs.registerLanguage('ebnf', require('highlight.js/lib/languages/ebnf'))
+  hljs.registerLanguage('graphql', function hljsDefineGraphQL (hljs) {
+    return {
+      aliases: ['gql'],
+      keywords: {
+        keyword:
+          'query mutation subscription|10 input schema implements type interface union scalar fragment|10 enum on ...',
+        literal: 'ID ID! String Float Int Boolean',
+        variable: 'true false null',
+      },
+      contains: [
+        hljs.HASH_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        {
+          className: 'literal',
+          begin: '[^\\w][A-Z][a-z]',
+          end: '\\W',
+          excludeEnd: true,
+        },
+        {
+          className: 'literal',
+          begin: ':\\s\\[',
+          end: '[\\]!]{1,3}',
+          excludeBegin: true,
+          excludeEnd: true,
+        },
+        {
+          className: 'type',
+          begin: '[^\\w](?!ID)[A-Z][A-Z]',
+          end: '\\W',
+          excludeEnd: true,
+        },
+        {
+          className: 'name',
+          begin: '\\$',
+          end: '\\W',
+          excludeEnd: true,
+        },
+        {
+          className: 'meta',
+          begin: '@',
+          end: '\\W',
+          excludeEnd: true,
+        },
+      ],
+      illegal: /([;<']|BEGIN)/,
+    }
+  })
   hljs.registerLanguage('gsql', function (hljs) {
     'use strict'
     const ACCUMULATORS = 'AndAccum ArrayAccum AvgAccum BagAccum ' +
