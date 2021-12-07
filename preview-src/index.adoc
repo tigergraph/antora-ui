@@ -110,6 +110,36 @@ puts "foo\nbar"
 ----
 |===
 
+=== Long table
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Name |Description |Default
+|Admin.BasicConfig.Env |The runtime environment variables, separated by
+'`;`' |`+nan+`
+
+|Admin.BasicConfig.LogConfig.LogFileMaxDurationDay |The maximum number
+of days to retain old log files based on the timestamp encoded in their
+filename |`+90+`
+
+|Admin.BasicConfig.LogConfig.LogFileMaxSizeMB |The maximum size in
+megabytes of the log file before it gets rotated |`+100+`
+
+|Admin.BasicConfig.LogConfig.LogLevel |The log
+level("`INFO`","`WARN`","`ERROR`"), default is INFO |`+INFO+`
+
+|Admin.BasicConfig.LogConfig.LogRotationFileNumber |The maximum number
+of old log files to retain |`+100+`
+
+|Admin.BasicConfig.LogDirRelativePath |The relative path (to the
+System.LogRoot) of log directory for Admin |`+admin+`
+
+|Admin.BasicConfig.Nodes |The node list for Admin
+|`+[{"HostID":"m1","Partition":0,"Replica":1},{"HostID":"m2","Partition":0,"Replica":2}]+`
+
+|Admin.Port |The port for Admin |`+12471+`
+|===
+
 Select menu:File[Open Project] to open the project in your IDE.
 Per ea btn:[Cancel] inimicus.
 Ferri kbd:[F11] tacimates constituam sed ex, eu mea munere vituperata kbd:[Ctrl,T] constituam.
@@ -264,9 +294,9 @@ CREATE QUERY pageRankDyn (FLOAT maxChange=0.00, INT maxIter=25,
   STRING vType, STRING eType, STRING attr)  //parameterized schema
 //no graph name
 {
-  MaxAccum<float> @@maxDiff = 9999; 
-  SumAccum<float> @rcvd_score = 0; 
-  SumAccum<float> @score = 1; 
+  MaxAccum<float> @@maxDiff = 9999;
+  SumAccum<float> @rcvd_score = 0;
+  SumAccum<float> @score = 1;
 
   Start = {vType};
   WHILE @@maxDiff > maxChange LIMIT maxIter DO
