@@ -225,6 +225,8 @@ h1.page + aside.toc.embedded {
 .doc table.tableblock th,
 .doc table.tableblock td {
   padding: 0.5rem;
+  max-width: 150px;
+  word-wrap: break-word;
 }
 
 .doc table.tableblock thead th {
