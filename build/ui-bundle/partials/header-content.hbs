@@ -1,0 +1,54 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img id="navbar-logo" class="navbar-item" src="https://www.tigergraph.com/wp-content/uploads/2020/05/TG_LOGO.svg" alt="TigerGraph Logo">
+      <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <input id="search" class="st-default-search-input"> 
+          {{!-- <div id="docsearch"></div> --}}
+        </div>
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Docs</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
+            <a class="navbar-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
+            <a class="navbar-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
+            <a class="navbar-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
+            <a class="navbar-item" href="{{relativize site.components.gui.url}}">{{site.components.gui.title}}</a>
+            <a class="navbar-item" href="https://docs-legacy.tigergraph.com">Legacy documentation</a>
+          </div>
+        </div>
+        {{!-- <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div> --}}
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://developers.tigergraph.com/">Developer Site</a>
+            <a class="navbar-item" href="https://community.tigergraph.com/">Community Forum</a>
+            <a class="navbar-item" href="https://tigergraph.freshdesk.com/support/solutions">Knowledge Base</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://info.tigergraph.com/enterprise-free">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
