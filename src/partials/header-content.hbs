@@ -11,10 +11,25 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <div class="navbar-item">
+        {{!-- <div class="navbar-item">
           <input id="search" class="st-default-search-input"> 
           {{!-- <div id="docsearch"></div> --}}
+        </div> --}}
+        <div class="navbar-item search hide-for-print">
+          {{#if (and page.component (ne page.component.name 'home') (ne page.component.name 'ROOT'))}}
+          <div id="search" class="field has-filter">
+            <input class="query" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:{{page.component.name}}"> In this project
+            </label>
+          </div>
+          {{else}}
+          <div id="search" class="field">
+            <input class="query" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
+          </div>
+          {{/if}}
         </div>
+
         <a class="navbar-item" href="#">Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Docs</a>
@@ -27,14 +42,7 @@
             <a class="navbar-item" href="https://docs-legacy.tigergraph.com">Legacy documentation</a>
           </div>
         </div>
-        {{!-- <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Services</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Service A</a>
-            <a class="navbar-item" href="#">Service B</a>
-            <a class="navbar-item" href="#">Service C</a>
-          </div>
-        </div> --}}
+
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Resources</a>
           <div class="navbar-dropdown">
