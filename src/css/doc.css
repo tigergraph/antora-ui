@@ -901,8 +901,8 @@ h1.page + aside.toc.embedded {
   margin-top: 0;
 }
 
-@media print {  
+@media print {
   .tab-pane {
-    display: block!important;
+    display: block !important;
   }
 }

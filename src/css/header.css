@@ -286,13 +286,18 @@ body {
   }
 }
 
+#search {
+  border: gray 1.5px solid;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem 0 0;
+}
+
 #search .query {
   display: inline-block;
   width: 190px;
   height: 16px;
   padding: 7px 11px 7px 28px;
-  border: 1px solid #bbb;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: none;
   font-weight: 400;
   color: #3b454f;
   font-size: 14px;
@@ -312,8 +317,12 @@ body {
   font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
 }
 
+#search .query:focus {
+  outline: none;
+}
+
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
-  max-height: calc(100vh - 3.25rem);
+  max-height: calc(100vh - 6.25rem);
 }
 
 .algolia-autocomplete .algolia-docsearch-suggestion--title {
