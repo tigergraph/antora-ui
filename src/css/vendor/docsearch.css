@@ -1,5 +1,3 @@
-@import "docsearch.js/dist/cdn/docsearch.css";
-
 .algolia-autocomplete-results {
   position: absolute;
   top: 100%;
