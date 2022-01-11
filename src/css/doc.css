@@ -900,3 +900,9 @@ h1.page + aside.toc.embedded {
 .tab-pane > :first-child {
   margin-top: 0;
 }
+
+@media print {
+  .tab-pane {
+    display: block !important;
+  }
+}

@@ -25,7 +25,7 @@
   grid-template-rows: auto 1fr auto;
   font-size: 14px;
   background-color: #f4f4f4;
-  align-items: start;
+  align-items: flex-start;
 }
 
 #footer-logo {
