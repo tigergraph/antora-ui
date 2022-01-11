@@ -1,5 +1,21 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
+
+{{#with (resolvePage page.relativeSrcPath model=false)}}
+{{#unless (eq ./asciidoc.attributes.stem undefined)}}
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]], ignoreClass: "nostem|nolatexmath" },
+  asciimath2jax: { delimiters: [["\\$", "\\$"]], ignoreClass: "nostem|noasciimath" },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+});
+</script>
+{{/unless}}
+{{/with}}
+
+
 <!-- Before the closing </body> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
@@ -16,6 +32,10 @@
     inputSelector: '#search',
     // Set debug to true to inspect the dropdown
     debug: false,
+    algoliaOptions: {
+      hitsPerPage: 20,
+      // See https://www.algolia.com/doc/api-reference/api-parameters/
+      },
   });
 </script> --}}
 
