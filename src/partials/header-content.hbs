@@ -4,11 +4,18 @@
       <img id="navbar-logo" class="navbar-item" src="https://www.tigergraph.com/wp-content/uploads/2020/05/TG_LOGO.svg" alt="TigerGraph Logo">
       <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
       <button class="navbar-burger" data-target="topbar-nav">
-        <span></span>
-        <span></span>
-        <span></span>
       </button>
     </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">
+            English
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">日本語</a>
+          </div>
+        </div>
+
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item search hide-for-print">
@@ -47,6 +54,9 @@
             <a class="navbar-item" href="https://tigergraph.freshdesk.com/support/solutions">Knowledge Base</a>
           </div>
         </div>
+
+
+
         <div class="navbar-item">
           <span class="control">
             <a class="button is-primary" href="https://info.tigergraph.com/enterprise-free">Download</a>
