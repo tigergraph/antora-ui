@@ -234,7 +234,7 @@
   function processQuery (controller, query) {
     var algoliaOptions = {}
     if (this.$facetFilterInput.prop('checked')) {
-      algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(",")
+      algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(',')
     }
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result
