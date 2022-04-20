@@ -235,6 +235,10 @@
     var algoliaOptions = {}
     if (this.$facetFilterInput.prop('checked')) {
       algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(',')
+      // Remove version filter if the component is versionless
+      if (algoliaOptions.facetFilters[0] === 'component:cloud') {
+        algoliaOptions.facetFilters.pop()
+      }
     }
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result

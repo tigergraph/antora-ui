@@ -16,8 +16,9 @@
           <div id="search" class="field has-filter">
             <input class="query" type="text" placeholder="Search the docs">
             <label class="filter checkbox">
-              <input type="checkbox" data-facet-filter="component:{{page.component.name}},version:{{page.version}}"> In this section
-            </label>
+              <input type="checkbox" data-facet-filter="component:cloud,version:master"> In this section
+              {{!-- <input type="checkbox" data-facet-filter="component:{{page.component.name}},version:{{page.version}}"> In this section
+            </label> --}}
           </div>
           {{else}}
           <div id="search" class="field">
