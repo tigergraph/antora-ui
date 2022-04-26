@@ -1,0 +1,25 @@
+ p.question{
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+.is-this-helpful-box button svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0.1rem;
+  margin-right: 0.2rem;
+  pointer-events: none;
+}
+
+.is-this-helpful-box button {
+  border: 1px solid #474c50;
+  border-radius: 0.25rem;
+  background: #fff;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  margin: 0;
+  font-size: .75rem;
+  color: #363a3d;
+  fill: #363a3d;
+  text-transform: uppercase;
+}
