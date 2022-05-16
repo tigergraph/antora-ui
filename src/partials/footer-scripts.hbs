@@ -1,8 +1,8 @@
 <script src="{{{uiRootPath}}}/js/site.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 
-{{#with (resolvePage page.relativeSrcPath model=false)}}
-{{#unless (eq ./asciidoc.attributes.stem undefined)}}
+{{!-- {{#with (resolvePage page.relativeSrcPath model=false)}}
+{{#unless (eq ./asciidoc.attributes.stem undefined)}} --}}
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -12,8 +12,8 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "none" } }
 });
 </script>
-{{/unless}}
-{{/with}}
+{{!-- {{/unless}}
+{{/with}} --}}
 
 
 <!-- Before the closing </body> -->
