@@ -6,6 +6,8 @@ Author Name
 :!table-caption:
 :page-pagination:
 
+{page.layout}
+
 image:multirepo-ssg.svg[Multirepo SSG,200,float=right]
 Platonem complectitur mediocritatem ea eos.
 Ei nonumy deseruisse ius.
