@@ -21,7 +21,7 @@ body {
 
 .navbar a {
   text-decoration: none;
-  text-transform: uppercase !important;
+  text-transform: uppercase;
 }
 
 .navbar-brand a,
@@ -57,20 +57,7 @@ body {
   /* padding: 0.3rem 1.2rem; */
   /* min-height: 2rem; */
   width: 100%;
-  font-size: 0.8rem;
-  font-weight: 200;
-  display: inline !important;
-  margin-right: 0.2rem;
-}
-
-.abc {
-  color: black;
-  text-indent: 2px;
-  line-height: var(--doc-line-height);
-  /* padding: 0.3rem 1.2rem; */
-  /* min-height: 2rem; */
-  width: 100%;
-  font-size: 0.8rem !important;
+  font-size: 0.6rem;
   font-weight: 200;
   display: inline !important;
   margin-right: 0.2rem;
@@ -78,7 +65,12 @@ body {
 
 .subnav .subnavbar-item a::after {
   color: #bec0c2;
-  content: " |";
+  content: " | ";
+}
+
+.subnav .subnavbar-item:last-child::after {
+  color: #bec0c2;
+  content: " ";
 }
 
 .subnav .subnavbar-item a:hover {
