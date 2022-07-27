@@ -21,17 +21,17 @@ body {
 
 .navbar a {
   text-decoration: none;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .navbar-brand a,
 .navbar-end a {
-  text-transform: uppercase !important;
+  /* text-transform: uppercase !important; */
 }
 
 .navbar .navbar-item {
-  font-weight: 700 !important;
-  font-size: 13px;
+  font-weight: 600 !important;
+  font-size: 15px;
   font-family: 'dashicons', sans-serif;
 }
 
@@ -385,6 +385,10 @@ body {
 
 #search .query:focus {
   outline: none;
+}
+
+#search .checkbox {
+  font-weight: 400;
 }
 
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
