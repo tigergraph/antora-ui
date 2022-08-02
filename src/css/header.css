@@ -21,6 +21,68 @@ body {
 
 .navbar a {
   text-decoration: none;
+  /* text-transform: uppercase; */
+}
+
+.navbar-brand a,
+.navbar-end a {
+  /* text-transform: uppercase !important; */
+}
+
+.navbar .navbar-item {
+  font-weight: 600 !important;
+  font-size: 15px;
+  font-family: 'dashicons', sans-serif;
+}
+
+.subnav .subnavbar-item {
+  color: var(--navbar-menu-font-color);
+  display: block;
+  line-height: var(--doc-line-height);
+  padding: 0.5rem 1rem;
+  font-family: 'urbane', sans-serif;
+}
+
+.subnav .subnavbar-title {
+  margin: 0.2rem 0;
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+  font-family: 'urbane', sans-serif;
+}
+
+.subnav .subnavbar-item a {
+  color: black;
+  text-indent: 2px;
+  line-height: var(--doc-line-height);
+  /* padding: 0.3rem 1.2rem; */
+  /* min-height: 2rem; */
+  width: 100%;
+  font-size: 0.6rem;
+  font-weight: 200;
+  display: inline !important;
+  margin-right: 0.2rem;
+}
+
+.subnav .subnavbar-item a::after {
+  color: #bec0c2;
+  content: " | ";
+}
+
+.subnav .subnavbar-item:last-child::after {
+  color: #bec0c2;
+  content: " ";
+}
+
+.subnav .subnavbar-item a:hover {
+  color: #fc6c04;
+}
+
+.navbar-end .navbar-dropdown .navbar-item {
+  font-family: 'urbane', sans-serif;
+  margin: 0.2rem 0;
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+  line-height: var(--doc-line-height);
 }
 
 .navbar-brand {
@@ -239,7 +301,6 @@ body {
   .navbar-end .navbar-link {
     /* color: var(--navbar-font-color); */
     color: #222;
-    font-weight: 400;
   }
 
   .navbar-end > a.navbar-item:hover,
@@ -267,6 +328,10 @@ body {
     position: absolute;
   }
 
+  .navbar-dropdown:nth-of-type(1) {
+    min-width: 340px;
+  }
+
   .navbar-dropdown .navbar-item {
     padding: 0.5rem 3rem 0.5rem 1rem;
     white-space: nowrap;
@@ -281,7 +346,8 @@ body {
     right: 0;
   }
 
-  .navbar-dropdown a.navbar-item:hover {
+  .navbar-dropdown a.navbar-item:hover,
+  .navbar-dropdown a.subnavbar-versions:hover {
     background: var(--navbar-menu_hover-background);
   }
 }
@@ -319,6 +385,10 @@ body {
 
 #search .query:focus {
   outline: none;
+}
+
+#search .checkbox {
+  font-weight: 400;
 }
 
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {

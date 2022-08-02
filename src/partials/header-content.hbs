@@ -26,14 +26,46 @@
 
         <a class="navbar-item" href="#">Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Docs</a>
+          <a class="navbar-link" href="#">Products</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.gui.url}}">{{site.components.gui.title}}</a>
-            <a class="navbar-item" href="https://docs-legacy.tigergraph.com">Legacy documentation</a>
+            <div class="subnav">
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">TigerGraph Server</div>
+
+                  {{!-- <a href="{{relativize site.components.tigergraph-server.url}}">testone</a>
+                  <a href="{{relativize site.components.tigergraph-server.url}}">testtwo</a> --}}
+
+                  <a class="subnavbar-item abc" href="{{relativize site.components.tigergraph-server.url}}" >{{site.components.tigergraph-server.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">TigerGraph UI tools</div>
+                  <a class="subnavbar-item" href="{{relativize site.components.gui.url}}">{{site.components.gui.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title"> GSQL</div>
+                 
+                  <a class="subnavbar-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">TigerGraph Cloud</div>
+                  <a class="subnavbar-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">Graph Data Science </div>
+                  <a class="subnavbar-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
+                  <a class="subnavbar-item" href="{{relativize site.components.ml-workbench.url}}">{{site.components.ml-workbench.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">Connectors and APIs </div>
+                  <a class="subnavbar-item" href="{{relativize site.components.pytigergraph.url}}">{{site.components.pytigergraph.title}}</a> 
+                  <a class="subnavbar-item" href="{{relativize site.components.graphql.url}}">{{site.components.graphql.title}}</a>
+                </div>
+                <div class="subnavbar-item">
+                  <div class="subnavbar-title">Legacy Documentation</div>
+                  <a class="subnavbar-item" href="https://docs-legacy.tigergraph.com"> Legacy Documentation </a>
+                </div>
+              
+            </div>
           </div>
         </div>
 
