@@ -61,11 +61,13 @@ body {
   font-weight: 200;
   display: inline !important;
   margin-right: 0.2rem;
+  padding: 0.1rem;
 }
 
 .subnav .subnavbar-item a::after {
   color: #bec0c2;
   content: " | ";
+  padding-left: 0.5rem;
 }
 
 .subnav .subnavbar-item:last-child::after {
