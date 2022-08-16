@@ -141,6 +141,7 @@
   --z-index-doc: 1;
   --z-index-nav: 2;
   --z-index-toolbar: 3;
-  --z-index-page-version-menu: 4;
-  --z-index-navbar: 5;
+  --z-index-navbar: 4;
+  --z-index-page-version-menu: 5;
+  --z-index-page-version-button: 6;
 }
