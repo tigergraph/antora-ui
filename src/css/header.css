@@ -266,7 +266,6 @@ body {
     right: 0;
     min-width: 200px;
     position: absolute;
-    padding: 0 0.75rem 0.75rem 0.75rem;
     box-shadow: 0 10px 20px 0 rgb(0 0 0 / 20%);
   }
 
@@ -351,6 +350,7 @@ body {
 .dropdown-category {
   display: flex;
   flex-wrap: wrap;
+  padding: 0 0.75rem 0 0.75rem;
 }
 
 .dropdown-label {
@@ -359,6 +359,7 @@ body {
   color: black;
   font-weight: bold;
   white-space: nowrap;
+  padding-left: 0.75rem;
 }
 
 .category-item {
