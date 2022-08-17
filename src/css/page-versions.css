@@ -1,40 +1,72 @@
 .page-versions {
-  margin: 0 0.2rem 0 auto;
+  margin: 1rem 3rem 0 3rem;
   position: relative;
   line-height: 1;
 }
 
-@media screen and (min-width: 1024px) {
-  .page-versions {
-    margin-right: 0.7rem;
-  }
-}
-
 .page-versions .version-menu-toggle {
   color: inherit;
-  background: url(../img/chevron.svg) no-repeat;
-  background-position: right 0.5rem top 50%;
-  background-size: auto 0.75em;
-  border: none;
+  background-color: white;
+  border-radius: 0.25rem;
+  border: 1px solid gray;
   outline: none;
   line-height: inherit;
-  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+  width: 100%;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
   position: relative;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   z-index: var(--z-index-page-version-button);
 }
 
-.page-versions .version-menu {
+.page-versions .version-menu-toggle:hover {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 2px 6px;
+}
+
+.button-text {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.button-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  transform: rotate(0deg);
+  transition: transform 0.3s linear;
+}
+
+.page-versions.is-active .button-arrow {
+  transform: rotate(180deg);
+  transition: transform 0.3s linear;
+}
+
+.page-versions .version-menu {
   min-width: 100%;
-  flex-direction: column;
-  align-items: flex-end;
-  background: linear-gradient(to bottom, var(--page-version-menu-background) 0%, var(--page-version-menu-background) 100%) no-repeat;
-  padding: 1.375rem 1.5rem 0.5rem 0.5rem;
+  background: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 0;
+  border-radius: 0.25rem;
   position: absolute;
-  top: 0;
+  top: 1.5rem;
   right: 0;
   white-space: nowrap;
   z-index: var(--z-index-page-version-menu);
+  transform-origin: center top;
+  animation: fade_in_show 0.3s;
+}
+
+.version-menu a {
+  display: inline-block;
+  width: 100%;
+  padding: 0.25rem 0 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.version-menu .version:hover {
+  background: var(--navbar-menu_hover-background);
 }
 
 .page-versions:not(.is-active) .version-menu {
@@ -58,4 +90,16 @@
   color: var(--page-version-missing-font-color);
   font-style: italic;
   text-decoration: none;
+}
+
+@keyframes fade_in_show {
+  0% {
+       opacity: 0;
+       transform: scale(0)
+  }
+
+  100% {
+       opacity: 1;
+       transform: scale(1)
+  }
 }

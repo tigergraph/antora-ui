@@ -356,8 +356,8 @@ body {
 .dropdown-label {
   margin: 0.5rem 0 0 0;
   font-size: calc(16 / var(--rem-base) * 1rem);
-  color: black;
-  font-weight: bold;
+  color: rgb(70, 70, 70);
+  font-weight: 500;
   white-space: nowrap;
   padding-left: 0.75rem;
 }
