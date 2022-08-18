@@ -249,6 +249,8 @@ body {
     color: var(--navbar-font-color); */
     background: #f2f2f2;
     color: #fc6c04;
+    border-bottom: 2px solid;
+    border-bottom-color: #fc6c04;
   }
 
   .navbar-end .navbar-link::after {

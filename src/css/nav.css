@@ -146,6 +146,13 @@ html.is-clipped--nav {
   transition: transform 0.3s linear;
 }
 
+.nav-item[data-depth="0"] > .nav-link,
+.nav-item[data-depth="0"] > .nav-text {
+  padding-left: 1.5rem;
+  display: inline-block;
+  width: 80%;
+}
+
 .nav-item[data-depth="1"] > .nav-link,
 .nav-item[data-depth="1"] > .nav-text {
   padding-left: 1.5rem;
