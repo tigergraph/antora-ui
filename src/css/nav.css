@@ -104,8 +104,10 @@ html.is-clipped--nav {
 }
 
 .nav-list {
-  margin: 0 0 0 0.75rem;
+  margin: 0;
   padding: 0;
+  transform-origin: center top;
+  animation: fade_in_show 0.3s;
 }
 
 .nav-menu > .nav-list + .nav-list {
@@ -133,19 +135,40 @@ html.is-clipped--nav {
 }
 
 .nav-item-toggle {
-  background: transparent url(../img/caret.svg) no-repeat center / 50%;
+  background: transparent;
   border: none;
   outline: none;
-  line-height: inherit;
-  position: absolute;
-  height: calc(var(--nav-line-height) * 1em);
-  width: calc(var(--nav-line-height) * 1em);
-  margin-top: -0.05em;
-  margin-left: calc(var(--nav-line-height) * -1em);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  transform: rotate(0);
+  transition: transform 0.3s linear;
 }
 
 .nav-item.is-active > .nav-item-toggle {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
+  transition: transform 0.3s linear;
+}
+
+.nav-item[data-depth="2"] > .nav-link {
+  padding-left: 0.75rem;
+  display: block;
+}
+
+.nav-item[data-depth="3"] > .nav-link {
+  padding-left: 1.5rem;
+  display: block;
+}
+
+.nav-item[data-depth="4"] > .nav-link {
+  padding-left: 2.25rem;
+  display: block;
+}
+
+.nav-item[data-depth="5"] > .nav-link {
+  padding-left: 3rem;
+  display: block;
 }
 
 .is-current-page > .nav-link,
@@ -262,4 +285,16 @@ html.is-clipped--nav {
   border-color: currentColor;
   opacity: 0.9;
   font-weight: var(--body-font-weight-bold);
+}
+
+@keyframes fade_in_show {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
