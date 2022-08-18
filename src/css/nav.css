@@ -146,29 +146,29 @@ html.is-clipped--nav {
   transition: transform 0.3s linear;
 }
 
+.nav-item[data-depth="0"] > .nav-link,
+.nav-item[data-depth="0"] > .nav-text {
+  padding-left: 1.5rem;
+  display: inline-block;
+  width: 80%;
+}
+
 .nav-item[data-depth="1"] > .nav-link,
 .nav-item[data-depth="1"] > .nav-text {
-  padding-left: 1.5rem;
+  padding-left: 2.25rem;
   display: inline-block;
   width: 80%;
 }
 
 .nav-item[data-depth="2"] > .nav-link,
 .nav-item[data-depth="2"] > .nav-text {
-  padding-left: 2.25rem;
-  display: inline-block;
-  width: 80%;
-}
-
-.nav-item[data-depth="3"] > .nav-link,
-.nav-item[data-depth="3"] > .nav-text {
   padding-left: 3rem;
   display: inline-block;
   width: 100%;
 }
 
-.nav-item[data-depth="4"] > .nav-link,
-.nav-item[data-depth="4"] > .nav-text {
+.nav-item[data-depth="3"] > .nav-link,
+.nav-item[data-depth="3"] > .nav-text {
   padding-left: 3.75rem;
   display: inline-block;
   width: 100%;
