@@ -82,7 +82,7 @@ html.is-clipped--nav {
 
 .nav-menu {
   min-height: 100%;
-  padding: 0 0.75rem 0.5rem 0.75rem;
+  padding: 0 0 0.5rem 0;
   line-height: var(--nav-line-height);
   position: relative;
 }
@@ -96,7 +96,7 @@ html.is-clipped--nav {
   font-size: 18px;
   font-weight: 500;
   margin: 0;
-  padding: 0.25em 0 0.125em;
+  padding: 0.25em 0.75rem 0.125em 0.75rem;
 }
 
 .nav-menu a {
@@ -116,7 +116,6 @@ html.is-clipped--nav {
 
 .nav-item {
   list-style: none;
-  margin-top: 0.5em;
 }
 
 /* adds some breathing room below a nested list */
@@ -138,10 +137,6 @@ html.is-clipped--nav {
   background: transparent;
   border: none;
   outline: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float: right;
   transform: rotate(0);
   transition: transform 0.3s linear;
 }
@@ -151,31 +146,52 @@ html.is-clipped--nav {
   transition: transform 0.3s linear;
 }
 
-.nav-item[data-depth="2"] > .nav-link {
-  padding-left: 0.75rem;
-  display: block;
-}
-
-.nav-item[data-depth="3"] > .nav-link {
+.nav-item[data-depth="1"] > .nav-link,
+.nav-item[data-depth="1"] > .nav-text {
   padding-left: 1.5rem;
-  display: block;
+  display: inline-block;
+  width: 80%;
 }
 
-.nav-item[data-depth="4"] > .nav-link {
+.nav-item[data-depth="2"] > .nav-link,
+.nav-item[data-depth="2"] > .nav-text {
   padding-left: 2.25rem;
-  display: block;
+  display: inline-block;
+  width: 80%;
 }
 
-.nav-item[data-depth="5"] > .nav-link {
+.nav-item[data-depth="3"] > .nav-link,
+.nav-item[data-depth="3"] > .nav-text {
   padding-left: 3rem;
-  display: block;
+  display: inline-block;
+  width: 100%;
+}
+
+.nav-item[data-depth="4"] > .nav-link,
+.nav-item[data-depth="4"] > .nav-text {
+  padding-left: 3.75rem;
+  display: inline-block;
+  width: 100%;
+}
+
+.nav-item a {
+  text-decoration: none;
+}
+
+.nav-link,
+.nav-text {
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  background: var(--navbar-menu_hover-background);
 }
 
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
   /* font-weight: var(--body-font-weight-bold); */
   font-weight: 500;
-  color: #f78116;
+  background-color: rgba(247, 129, 22, 0.3);
 }
 
 .nav-panel-explore {
