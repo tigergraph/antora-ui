@@ -3,7 +3,7 @@
     <div class="panels">
 {{> page-versions}}
 {{> nav-menu}}
-{{#if (or (eq page.url './home') (eq page.layout '404'))}}
+{{#if (or (eq page.attributes.role 'home') (eq page.layout '404'))}}
   {{> nav-explore}}
 {{/if}}
     </div>
