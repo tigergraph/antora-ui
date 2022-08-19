@@ -203,9 +203,15 @@ h1.page + aside.toc.embedded {
 
 .doc table.tableblock {
   background: var(--body-background);
-  border-collapse: collapse;
+  border-collapse: separate;
   font-size: calc(15 / var(--rem-base) * 1rem);
-  margin: 1.5rem 0 0;
+  margin-top: 1.5rem;
+  border-spacing: 0.75rem;
+}
+
+.doc td.tableblock {
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 20px 0 rgb(0 0 0 / 20%);
 }
 
 @media screen and (min-width: 1024px) {
@@ -224,19 +230,13 @@ h1.page + aside.toc.embedded {
 
 .doc table.tableblock th,
 .doc table.tableblock td {
-  padding: 0.5rem;
+  padding: 1rem;
   max-width: 150px;
   word-wrap: break-word;
 }
 
 .doc table.tableblock thead th {
   border-bottom: 2.5px solid var(--table-border-color);
-}
-
-.doc table.tableblock td,
-.doc table.tableblock > :not(thead) th {
-  border-top: 1px solid var(--table-border-color);
-  border-bottom: 1px solid var(--table-border-color);
 }
 
 .doc table.stripes-all > tbody > tr,
