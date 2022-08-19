@@ -192,7 +192,8 @@ html.is-clipped--nav {
 .is-current-page > .nav-text {
   /* font-weight: var(--body-font-weight-bold); */
   font-weight: 500;
-  background-color: rgba(247, 129, 22, 0.3);
+  color: #7a4812;
+  background-color: rgba(247, 129, 22, 0.15);
 }
 
 .nav-panel-explore {

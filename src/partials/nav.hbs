@@ -3,6 +3,9 @@
     <div class="panels">
 {{> page-versions}}
 {{> nav-menu}}
+{{#if (or (eq page.layout 'default') (eq page.layout '404'))}}
+  {{> nav-explore}}
+{{/if}}
     </div>
   </aside>
 </div>
