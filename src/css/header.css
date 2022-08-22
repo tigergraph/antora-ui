@@ -285,6 +285,10 @@ body {
     border-radius: inherit;
   }
 
+.dropdown-category:last-of-type {
+    margin-bottom: 1rem;
+  }
+
   .navbar-dropdown.is-right {
     left: auto;
     right: 0;

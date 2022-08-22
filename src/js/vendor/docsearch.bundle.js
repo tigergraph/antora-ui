@@ -233,13 +233,15 @@
 
   function processQuery (controller, query) {
     var algoliaOptions = {}
-    if (this.$facetFilterInput.prop('checked')) {
-      algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(',')
-      // Remove version filter if the component is versionless
-      if (algoliaOptions.facetFilters[0] === 'component:cloud') {
-        algoliaOptions.facetFilters.pop()
-      }
-    }
+    // if (this.$facetFilterInput.prop('checked')) {
+    //   algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(',')
+    //   // Remove version filter if the component is versionless
+    //   if (algoliaOptions.facetFilters[0] === 'component:cloud') {
+    //     algoliaOptions.facetFilters.pop()
+    //   }
+    // }
+    algoliaOptions.facetFilters = [["component:tigergraph-server", "component:graph-ml"]]
+    console.log(this.$facetFilterInput.data('testCool'))
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result
     algoliaOptions.page = !activeResult || query === activeResult.query ? dataset.page || 0 : (dataset.page = 0)
