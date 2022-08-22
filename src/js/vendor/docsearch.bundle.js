@@ -240,7 +240,7 @@
     //     algoliaOptions.facetFilters.pop()
     //   }
     // }
-    algoliaOptions.facetFilters = [["component:tigergraph-server", "component:graph-ml"]]
+    algoliaOptions.facetFilters = [['component:tigergraph-server', 'component:graph-ml']]
     console.log(this.$facetFilterInput.data('testCool'))
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result
