@@ -241,7 +241,11 @@
     //   }
     // }
     algoliaOptions.facetFilters = [['component:tigergraph-server', 'component:graph-ml']]
-    console.log(this.$facetFilterInput.data('testCool'))
+    const objectTest = this.$facetFilterInput.data('testCool')
+    console.log(objectTest)
+    // for (const property in objectTest) {
+    //   console.log(`${property}: ${objectTest[property]}`);
+    // }
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result
     algoliaOptions.page = !activeResult || query === activeResult.query ? dataset.page || 0 : (dataset.page = 0)

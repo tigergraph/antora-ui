@@ -83,6 +83,7 @@ function registerPartials (src) {
 function registerHelpers (src) {
   handlebars.registerHelper('resolvePage', resolvePage)
   handlebars.registerHelper('resolvePageURL', resolvePageURL)
+  handlebars.registerHelper('json', json)
   return vfs.src('helpers/*.js', { base: src, cwd: src }).pipe(
     map((file, enc, next) => {
       handlebars.registerHelper(file.stem, requireFromString(file.contents.toString()))
@@ -121,6 +122,10 @@ function resolvePage (spec, context = {}) {
 
 function resolvePageURL (spec, context = {}) {
   if (spec) return '/' + (spec = spec.split(':').pop()).slice(0, spec.lastIndexOf('.')) + '.html'
+}
+
+function json (obj, context = {}) {
+  return JSON.stringify(obj)
 }
 
 function transformHandlebarsError ({ message, stack }, layout) {
