@@ -106,8 +106,6 @@ html.is-clipped--nav {
 .nav-list {
   margin: 0;
   padding: 0;
-  transform-origin: center top;
-  animation: fade_in_show 0.3s;
 }
 
 .nav-menu > .nav-list + .nav-list {
@@ -184,7 +182,8 @@ html.is-clipped--nav {
   padding-bottom: 0.5rem;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-text:hover {
   background: var(--navbar-menu_hover-background);
 }
 
@@ -303,16 +302,4 @@ html.is-clipped--nav {
   border-color: currentColor;
   opacity: 0.9;
   font-weight: var(--body-font-weight-bold);
-}
-
-@keyframes fade_in_show {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
