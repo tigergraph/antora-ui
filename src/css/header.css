@@ -149,12 +149,17 @@ body {
   -ms-flex-align: center;
   align-items: center;
   background: #fff;
-  border: 2px solid #f78116;
-  border-radius: 0;
+  background-color: #f78116;
+  border-radius: 0.25rem;
   height: 1.75rem;
-  color: #222;
+  color: white;
   padding: 0.75em;
+  font-weight: 100;
   white-space: nowrap;
+}
+
+.navbar .button:hover {
+  background-color: #fc6c04;
 }
 
 @media screen and (max-width: 1023.5px) {
@@ -249,6 +254,8 @@ body {
     color: var(--navbar-font-color); */
     background: #f2f2f2;
     color: #fc6c04;
+    border-bottom: 2px solid;
+    border-bottom-color: #fc6c04;
   }
 
   .navbar-end .navbar-link::after {
@@ -262,9 +269,11 @@ body {
     border-radius: 0 0 0.25rem 0.25rem;
     display: none;
     top: 100%;
-    left: 0;
-    min-width: 100%;
+    left: auto;
+    right: 0;
+    min-width: 200px;
     position: absolute;
+    box-shadow: 0 10px 20px 0 rgb(0 0 0 / 20%);
   }
 
   .navbar-dropdown .navbar-item {
@@ -274,6 +283,10 @@ body {
 
   .navbar-dropdown .navbar-item:last-child {
     border-radius: inherit;
+  }
+
+  .dropdown-category:last-of-type {
+    margin-bottom: 1rem;
   }
 
   .navbar-dropdown.is-right {
@@ -290,6 +303,7 @@ body {
   border: gray 1.5px solid;
   border-radius: 0.5rem;
   padding: 0 0.5rem 0 0;
+  display: flex;
 }
 
 #search .query {
@@ -297,6 +311,7 @@ body {
   width: 190px;
   height: 16px;
   padding: 7px 11px 7px 28px;
+  margin-left: 2px;
   border: none;
   font-weight: 400;
   color: #3b454f;
@@ -321,6 +336,17 @@ body {
   outline: none;
 }
 
+#search label {
+  font-size: 14px;
+}
+
+.filter,
+.filter1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
   max-height: calc(100vh - 6.25rem);
 }
@@ -343,4 +369,37 @@ body {
   height: 0.9em;
   width: auto;
   vertical-align: -0.1em;
+}
+
+.dropdown-category {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 0.75rem 0 0.75rem;
+}
+
+.dropdown-label {
+  margin: 0.5rem 0 0 0;
+  font-size: calc(16 / var(--rem-base) * 1rem);
+  color: rgb(70, 70, 70);
+  font-weight: 500;
+  white-space: nowrap;
+  padding-left: 0.75rem;
+}
+
+.category-item {
+  padding: 0 0.5rem;
+  color: var(--navbar-font-color);
+  font-weight: 400;
+  font-size: calc(14 / var(--rem-base) * 1rem);
+  white-space: nowrap;
+  line-height: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.category-item:not(:last-child) {
+  border-right: 2px solid #b2b2b2;
+}
+
+.category-item:hover {
+  color: #c15000;
 }

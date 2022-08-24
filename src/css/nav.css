@@ -82,7 +82,7 @@ html.is-clipped--nav {
 
 .nav-menu {
   min-height: 100%;
-  padding: 0.5rem 0.75rem;
+  padding: 0 0 0.5rem 0;
   line-height: var(--nav-line-height);
   position: relative;
 }
@@ -96,7 +96,7 @@ html.is-clipped--nav {
   font-size: 18px;
   font-weight: 500;
   margin: 0;
-  padding: 0.25em 0 0.125em;
+  padding: 0.25em 0.75rem 0.125em 0.75rem;
 }
 
 .nav-menu a {
@@ -104,7 +104,7 @@ html.is-clipped--nav {
 }
 
 .nav-list {
-  margin: 0 0 0 0.75rem;
+  margin: 0;
   padding: 0;
 }
 
@@ -114,7 +114,6 @@ html.is-clipped--nav {
 
 .nav-item {
   list-style: none;
-  margin-top: 0.5em;
 }
 
 /* adds some breathing room below a nested list */
@@ -133,26 +132,67 @@ html.is-clipped--nav {
 }
 
 .nav-item-toggle {
-  background: transparent url(../img/caret.svg) no-repeat center / 50%;
+  background: transparent;
   border: none;
   outline: none;
-  line-height: inherit;
-  position: absolute;
-  height: calc(var(--nav-line-height) * 1em);
-  width: calc(var(--nav-line-height) * 1em);
-  margin-top: -0.05em;
-  margin-left: calc(var(--nav-line-height) * -1em);
+  transform: rotate(0);
+  transition: transform 0.3s linear;
 }
 
 .nav-item.is-active > .nav-item-toggle {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
+  transition: transform 0.3s linear;
+}
+
+.nav-item[data-depth="1"] > .nav-link,
+.nav-item[data-depth="1"] > .nav-text {
+  padding-left: 1.5rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="2"] > .nav-link,
+.nav-item[data-depth="2"] > .nav-text {
+  padding-left: 2.25rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="3"] > .nav-link,
+.nav-item[data-depth="3"] > .nav-text {
+  padding-left: 3rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="4"] > .nav-link,
+.nav-item[data-depth="4"] > .nav-text {
+  padding-left: 3.75rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item a {
+  text-decoration: none;
+}
+
+.nav-link,
+.nav-text {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav-link:hover,
+.nav-text:hover {
+  background: var(--navbar-menu_hover-background);
 }
 
 .is-current-page > .nav-link,
 .is-current-page > .nav-text {
   /* font-weight: var(--body-font-weight-bold); */
   font-weight: 500;
-  color: #f78116;
+  color: #7a4812;
+  background-color: rgba(247, 129, 22, 0.15);
 }
 
 .nav-panel-explore {

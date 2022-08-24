@@ -4,17 +4,32 @@
       <img id="navbar-logo" class="navbar-item" src="https://www.tigergraph.com/wp-content/uploads/2020/05/TG_LOGO.svg" alt="TigerGraph Logo">
       <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
       <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
-
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
+        <!-- Language Picker Dropdown -->
+        {{!-- <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">          
+            English
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://developers.tigergraph.com/">English</a>
+            <a class="navbar-item" href="https://community.tigergraph.com/">日本</a>
+          </div>
+        </div> --}}
         <div class="navbar-item search hide-for-print">
           {{#if (and page.component (ne page.component.name 'home') (ne page.component.name 'ROOT'))}}
           <div id="search" class="field has-filter">
             <input class="query" type="text" placeholder="Search the docs">
             <label class="filter checkbox">
-              <input type="checkbox" data-facet-filter="component:{{page.component.name}},version:{{page.version}}"> In this section
+              <input type="checkbox" data-facet-filter="component:{{page.component.name}},version:{{page.version}}"> <span>In this section</span>
+            </label>
+            <label class="filter1 checkbox1">
+              <input type="checkbox"> <span>Latest</span>
             </label>
           </div>
           {{else}}
@@ -26,14 +41,44 @@
 
         <a class="navbar-item" href="#">Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Docs</a>
+          <a class="navbar-link" href="#">Products</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
-            <a class="navbar-item" href="{{relativize site.components.gui.url}}">{{site.components.gui.title}}</a>
-            <a class="navbar-item" href="https://docs-legacy.tigergraph.com">Legacy documentation</a>
+            <div class="dropdown-label">TigerGraph Server</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
+            </div>
+
+            <div class="dropdown-label">TigerGraph UI tools</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.gui.url}}">{{site.components.gui.title}}</a>
+            </div>
+            
+            <div class="dropdown-label">GSQL</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
+            </div>
+            
+            <div class="dropdown-label">TigerGraph Cloud</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
+            </div>
+            
+            <div class="dropdown-label">Graph Data Science</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>              
+              <a class="category-item" href="{{relativize site.components.ml-workbench.url}}">{{site.components.ml-workbench.title}}</a>
+            </div>
+            
+            <div class="dropdown-label">Connectors and APIs</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.pytigergraph.url}}">{{site.components.pytigergraph.title}}</a>              
+              <a class="category-item" href="{{relativize site.components.graphql.url}}">{{site.components.graphql.title}}</a>
+            </div>
+            
+            <div class="dropdown-label">Legacy Documentation</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="https://docs-legacy.tigergraph.com"> Legacy Documentation </a>
+            </div>
           </div>
         </div>
 

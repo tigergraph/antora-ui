@@ -208,6 +208,17 @@ h1.page + aside.toc.embedded {
   margin: 1.5rem 0 0;
 }
 
+.doc table.home-card {
+  border-collapse: separate;
+  margin-top: 1.5rem;
+  border-spacing: 0.75rem;
+}
+
+.doc table.home-card td {
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 20px 0 rgb(0 0 0 / 20%);
+}
+
 @media screen and (min-width: 1024px) {
   .doc table.tableblock {
     box-shadow: 5px 0 0 var(--color-white);
@@ -229,6 +240,11 @@ h1.page + aside.toc.embedded {
   word-wrap: break-word;
 }
 
+.doc table.home-card th,
+.doc table.home-card td {
+  padding: 1rem;
+}
+
 .doc table.tableblock thead th {
   border-bottom: 2.5px solid var(--table-border-color);
 }
@@ -237,6 +253,12 @@ h1.page + aside.toc.embedded {
 .doc table.tableblock > :not(thead) th {
   border-top: 1px solid var(--table-border-color);
   border-bottom: 1px solid var(--table-border-color);
+}
+
+.doc table.home-card td,
+.doc table.home-card > :not(thead) th {
+  border-top: none;
+  border-bottom: none;
 }
 
 .doc table.stripes-all > tbody > tr,

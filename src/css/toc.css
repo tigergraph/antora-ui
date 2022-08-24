@@ -80,6 +80,7 @@
 
 .toc .toc-menu a:hover {
   color: var(--link-font-color);
+  border-left-color: #fc6c04;
 }
 
 .toc .toc-menu a.is-active {

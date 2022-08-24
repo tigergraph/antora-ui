@@ -17,7 +17,7 @@
 .footer {
   display: flex;
   flex-flow: row wrap;
-  padding: 50px 30px 20px 80px;
+  padding: 20px 30px 10px 80px;
   color: #2f2f2f;
   border-top: 1px solid #e5e5e5;
   font-family: acumin-pro, system-ui, sans-serif;
@@ -40,7 +40,6 @@
 
 .footer__addr {
   margin-right: 1.25em;
-  margin-bottom: 2em;
 }
 
 .footer__logo {
@@ -117,6 +116,7 @@
   display: flex;
   flex-wrap: wrap;
   color: #999;
+  padding-top: 1rem;
 }
 
 .legal__links {

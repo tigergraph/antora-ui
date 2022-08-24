@@ -7,6 +7,7 @@
   var S_KEY_CODE = 83
   var SOLIDUS_KEY_CODE = 191
   var SEARCH_FILTER_ACTIVE_KEY = 'docs:search-filter-active'
+  var SEARCH_FILTER_ACTIVE_KEY1 = 'docs:search-filter-active1'
   var SAVED_SEARCH_STATE_KEY = 'docs:saved-search-state'
   var SAVED_SEARCH_STATE_VERSION = '1'
 
@@ -70,6 +71,11 @@
       .find('.filter input')
       .on('change', toggleFilter.bind(typeahead))
       .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY) === 'true')
+    typeahead.$facetFilterInput1 = input
+      .closest('#' + searchField.id)
+      .find('.filter1 input')
+      .on('change', toggleFilter.bind(typeahead))
+      .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === 'true')
     menu.find('.ds-pagination--prev').on('click', paginate.bind(typeahead, -1)).css('visibility', 'hidden')
     menu.find('.ds-pagination--next').on('click', paginate.bind(typeahead, 1)).css('visibility', 'hidden')
     monitorCtrlKey.call(typeahead)
@@ -116,8 +122,14 @@
   }
 
   function toggleFilter (e) {
+    console.log(e.path[1].className)
     if ('restoring' in this.dropdown) return
-    window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY, e.target.checked)
+    if (e.path[1].className === 'filter checkbox') {
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY, e.target.checked)
+    }
+    if (e.path[1].className === 'filter1 checkbox1') {
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, e.target.checked)
+    }
     isClosed(this) ? this.$input.focus() : requery.call(this)
   }
 
@@ -233,12 +245,19 @@
 
   function processQuery (controller, query) {
     var algoliaOptions = {}
+    algoliaOptions.facetFilters = []
     if (this.$facetFilterInput.prop('checked')) {
-      algoliaOptions.facetFilters = this.$facetFilterInput.data('facetFilter').split(',')
+      algoliaOptions.facetFilters = [...algoliaOptions.facetFilters,
+        ...this.$facetFilterInput.data('facetFilter').split(',')]
       // Remove version filter if the component is versionless
       if (algoliaOptions.facetFilters[0] === 'component:cloud') {
         algoliaOptions.facetFilters.pop()
+      } else if (algoliaOptions.facetFilters[1] === 'version:1') {
+        algoliaOptions.facetFilters[1] = 'version:1.0'
       }
+    }
+    if (this.$facetFilterInput1.prop('checked')) {
+      algoliaOptions.facetFilters.push('latest:true')
     }
     var dataset = this.dropdown.datasets[0]
     var activeResult = dataset.result
@@ -292,6 +311,7 @@
     if (!searchState) return
     this.dropdown.restoring = searchState
     this.$facetFilterInput.prop('checked', searchState.filter) // change event will be ignored
+    this.$facetFilterInput1.prop('checked', searchState.filter1)
     var dataset = this.dropdown.datasets[0]
     dataset.page = searchState.page
     delete dataset.result
@@ -306,6 +326,7 @@
         _version: SAVED_SEARCH_STATE_VERSION,
         cursor: this.dropdown.getCurrentCursor().index() + 1,
         filter: this.$facetFilterInput.prop('checked'),
+        filter1: this.$facetFilterInput1.prop('checked'),
         page: this.dropdown.datasets[0].page,
         query: this.getVal(),
       })

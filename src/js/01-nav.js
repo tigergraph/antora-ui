@@ -25,18 +25,11 @@
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
     var li = btn.parentElement
     btn.addEventListener('click', toggleActive.bind(li))
-    var navItemSpan = findNextElement(btn, '.nav-text')
+    var navItemSpan = findPreviousElement(btn, '.nav-text')
     if (navItemSpan) {
       navItemSpan.style.cursor = 'pointer'
       navItemSpan.addEventListener('click', toggleActive.bind(li))
     }
-  })
-
-  nav.querySelector('[data-panel=explore] .context').addEventListener('click', function () {
-    // NOTE logic assumes there are only two panels
-    find(nav, '[data-panel]').forEach(function (panel) {
-      panel.classList.toggle('is-active')
-    })
   })
 
   // NOTE prevent text from being selected by double click
@@ -147,8 +140,8 @@
     return [].slice.call(from.querySelectorAll(selector))
   }
 
-  function findNextElement (from, selector) {
-    var el = from.nextElementSibling
+  function findPreviousElement (from, selector) {
+    var el = from.previousElementSibling
     return el && selector ? el[el.matches ? 'matches' : 'msMatchesSelector'](selector) && el : el
   }
 })()
