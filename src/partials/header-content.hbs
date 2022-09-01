@@ -2,7 +2,8 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <img id="navbar-logo" class="navbar-item" src="https://www.tigergraph.com/wp-content/uploads/2020/05/TG_LOGO.svg" alt="TigerGraph Logo">
-      <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a>
+      {{!-- <a class="navbar-item" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">{{site.title}}</a> --}}
+            <a class="navbar-item" href="/home">{{site.title}}</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -39,7 +40,7 @@
           {{/if}}
         </div>
 
-        <a class="navbar-item" href="#">Home</a>
+        <a class="navbar-item" href="/home">Home</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Products</a>
           <div class="navbar-dropdown">
