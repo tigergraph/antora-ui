@@ -172,6 +172,34 @@ html.is-clipped--nav {
   width: 80%;
 }
 
+.nav-item[data-depth="5"] > .nav-link,
+.nav-item[data-depth="5"] > .nav-text {
+  padding-left: 4.5rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="6"] > .nav-link,
+.nav-item[data-depth="6"] > .nav-text {
+  padding-left: 5.25rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="7"] > .nav-link,
+.nav-item[data-depth="7"] > .nav-text {
+  padding-left: 6rem;
+  display: inline-block;
+  width: 80%;
+}
+
+.nav-item[data-depth="8"] > .nav-link,
+.nav-item[data-depth="8"] > .nav-text {
+  padding-left: 6.75rem;
+  display: inline-block;
+  width: 80%;
+}
+
 .nav-item a {
   text-decoration: none;
 }
