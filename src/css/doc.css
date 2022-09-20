@@ -201,6 +201,11 @@ h1.page + aside.toc.embedded {
   margin: 1rem 0 0;
 }
 
+/* To make sure image sizes aren't too large */
+.doc .imageblock img {
+  max-width: 66% !important;
+}
+
 .doc table.tableblock {
   background: var(--body-background);
   border-collapse: collapse;
@@ -380,6 +385,7 @@ h1.page + aside.toc.embedded {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .doc .imageblock img,
