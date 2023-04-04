@@ -1,0 +1,12 @@
+<div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
+  <aside class="nav">
+    <div class="panels">
+{{> page-versions}}
+{{> nav-menu}}
+{{#if (or (eq page.attributes.role "home") (eq page.layout "404"))}}
+  {{> nav-explore}}
+{{/if}}
+{{> nav-explore-hidden}}
+    </div>
+  </aside>
+</div>
