@@ -9,17 +9,19 @@
     {{#each (rearrange site.components 'name' page.attributes.component-order)}}
       <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
         <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
+      {{!--
         {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
         <ul class="versions">
           {{#each ./versions}}
           <li class="version
             {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
             {{~#if (eq this ../latest)}} is-latest{{/if}}">
-            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>>
           </li>
           {{/each}}
         </ul>
         {{/if}}
+        --}}
     {{/each}}
   </ul>
 </div>
