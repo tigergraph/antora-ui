@@ -230,21 +230,22 @@ h1.page + aside.toc.embedded {
 }
 
 /* Tableblock responsive code */
+
 @media screen and (max-width: 767px) {
-  .doc table.tableblock {
+  .doc table.home-card {
     display: block;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .doc table.tableblock colgroup {
+  .doc table.home-card.col {
     display: none;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .doc table.tableblock tr,
-  .doc table.tableblock td {
+  .doc table.home-card tr,
+  .doc table.home-card td {
     display: block;
   }
 }
