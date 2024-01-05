@@ -269,10 +269,10 @@ h1.page + aside.toc.embedded {
   margin-top: 0;
 }
 
+/* removed max-width: 150px; */
 .doc table.tableblock th,
 .doc table.tableblock td {
   padding: 0.5rem;
-  max-width: 150px;
   word-wrap: break-word;
 }
 
