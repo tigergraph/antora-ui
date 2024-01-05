@@ -238,6 +238,7 @@ h1.page + aside.toc.embedded {
 }
 
 @media screen and (max-width: 767px) {
+  .doc table.home-card col:nth-child(0),
   .doc table.home-card col:nth-child(1),
   .doc table.home-card col:nth-child(2),
   .doc table.home-card col:nth-child(3) {
@@ -246,11 +247,18 @@ h1.page + aside.toc.embedded {
 }
 
 @media screen and (max-width: 767px) {
-  .doc table.home-card tr,
-  .doc table.home-card td {
+  .doc table.home-card tr {
     display: block;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .doc table.home-card td {
+    display: block;
+    max-width: fit-content;
+  }
+}
+
 /* Tableblock responsive code */
 
 .doc table.tableblock + * {
