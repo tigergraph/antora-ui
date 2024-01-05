@@ -220,7 +220,6 @@ h1.page + aside.toc.embedded {
 }
 
 .doc table.home-card td {
-  border-radius: 1.5rem;
   box-shadow: 0 2px 20px 0 rgb(0 0 0 / 20%);
 }
 
@@ -229,6 +228,27 @@ h1.page + aside.toc.embedded {
     box-shadow: 5px 0 0 var(--color-white);
   }
 }
+
+/* Tableblock responsive code */
+@media screen and (max-width: 767px) {
+  .doc table.tableblock {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .doc table.tableblock colgroup {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .doc table.tableblock tr,
+  .doc table.tableblock td {
+    display: block;
+  }
+}
+/* Tableblock responsive code */
 
 .doc table.tableblock + * {
   margin-top: 1.5rem;
