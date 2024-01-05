@@ -5,7 +5,7 @@
     <span class="version">{{#unless (eq page.componentVersion.displayVersion 'default')}}{{page.componentVersion.displayVersion}}{{/unless}}</span>
   </div>
   {{/if}}
-  <ul class="components">
+  <ul class="nav-list">
 {{!--
 {{#each (rearrange site.components 'name' page.attributes.component-order)}}
   <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
@@ -29,19 +29,19 @@
       <a class="category-item" href="{{relativize site.components.insights.url}}">{{site.components.insights.title}}</a>
     </div>
     <a class="category-item" href="{{relativize site.components.gui.modules.}}">Admin Portal</a>
-  --}}
-    <li class="nav-item" data-depth="1">
-      <a class="nav-link" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
-    </li>
-
-    <div class="dropdown-category">
-
-    </div>
 
     <div class="title">TigerGraph Cloud</div>
     <div class="dropdown-category">
       <a class="category-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
     </div>
+  --}}
+    <li class="nav-item" data-depth="0">
+      <a class="nav-link" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
+    </li>
+
+    <li class="nav-item" data-depth="0">
+      <a class="nav-link" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
+    </li>
 
     <div class="title">TigerGraph Suite</div>
     <div class="dropdown-category">
