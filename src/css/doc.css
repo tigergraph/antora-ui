@@ -238,7 +238,9 @@ h1.page + aside.toc.embedded {
 }
 
 @media screen and (max-width: 767px) {
-  .doc table.home-card colgroup {
+  .doc table.home-card col:nth-child(1),
+  .doc table.home-card col:nth-child(2),
+  .doc table.home-card col:nth-child(3) {
     display: none;
   }
 }
