@@ -5,7 +5,7 @@
     <span class="version">{{#unless (eq page.componentVersion.displayVersion 'default')}}{{page.componentVersion.displayVersion}}{{/unless}}</span>
   </div>
   {{/if}}
-  <ul class="nav-list">
+  <ul class="components">
 {{!--
 {{#each (rearrange site.components 'name' page.attributes.component-order)}}
   <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
@@ -44,10 +44,10 @@
     </li>
 
     <div class="title">TigerGraph Suite</div>
-    <div class="dropdown-category">
-      <a class="category-item" href="{{relativize site.components.gui.url}}">Admin Portal and GraphStudio</a>
-      <a class="category-item" href="{{relativize site.components.insights.url}}">{{site.components.insights.title}}</a>
-    </div>
+    <li class="nav-item" data-depth="1">
+      <a class="nav-link" href="{{relativize site.components.gui.url}}">Admin Portal and GraphStudio</a>
+      <a class="nav-link" href="{{relativize site.components.insights.url}}">{{site.components.insights.title}}</a>
+    </li>
 
     <div class="title">GSQL Language</div>
     <div class="dropdown-category">
