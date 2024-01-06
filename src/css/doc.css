@@ -255,7 +255,6 @@ h1.page + aside.toc.embedded {
 @media screen and (max-width: 767px) {
   .doc table.home-card td {
     display: block;
-    max-width: fit-content;
     margin-bottom: 15px;
   }
 }
