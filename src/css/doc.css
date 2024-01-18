@@ -204,7 +204,6 @@ h1.page + aside.toc.embedded {
 /* To make sure image sizes aren't too large */
 .doc .imageblock img {
   max-width: 66% !important;
-  box-shadow: none;
 }
 
 .doc table.tableblock {
@@ -420,13 +419,13 @@ h1.page + aside.toc.embedded {
   text-align: center;
 }
 
+/* box-shadow: 0 8px 16px 0 rgb(14 30 37 / 12%);  remove image shadow */
 .doc .imageblock img,
 .doc .image > img {
   display: inline-block;
   height: auto;
   max-width: 100%;
   vertical-align: middle;
-  box-shadow: 0 8px 16px 0 rgb(14 30 37 / 12%);
   border-radius: 0.5rem;
 }
 
