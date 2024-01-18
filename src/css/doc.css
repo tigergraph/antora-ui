@@ -204,6 +204,7 @@ h1.page + aside.toc.embedded {
 /* To make sure image sizes aren't too large */
 .doc .imageblock img {
   max-width: 66% !important;
+  box-shadow: none;
 }
 
 .doc table.tableblock {
