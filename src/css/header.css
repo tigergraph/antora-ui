@@ -388,7 +388,7 @@ body {
 
 .category-item {
   padding: 0 0.5rem;
-  color: var(--navbar-font-color);
+  color: #424242;
   font-weight: 400;
   font-size: calc(14 / var(--rem-base) * 1rem);
   white-space: nowrap;
