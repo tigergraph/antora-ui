@@ -298,6 +298,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .component .title {
+  display: none;
   font-weight: var(--body-font-weight-bold);
   color: inherit;
 }
