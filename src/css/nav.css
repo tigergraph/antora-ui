@@ -312,7 +312,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .component .version {
-  display: block;
+  display: none;
   margin: 0.375rem 0.375rem 0 0;
 }
 
@@ -323,7 +323,7 @@ html.is-clipped--nav {
   opacity: 0.75;
   white-space: nowrap;
   padding: 0.125em 0.25em;
-  display: inherit;
+  display: none;
 }
 
 .nav-panel-explore .component .is-current a {
