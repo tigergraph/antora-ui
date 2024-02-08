@@ -386,6 +386,15 @@ body {
   padding-left: 0.75rem;
 }
 
+/* revamp left nav css modeled after the dropdown label */
+.home-left-nav-title {
+  font-size: calc(16 / var(--rem-base) * 1rem);
+  color: #424242;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 0.25rem;
+}
+
 .category-item {
   padding: 0 0.5rem;
   color: #424242;
