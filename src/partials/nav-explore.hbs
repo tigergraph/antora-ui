@@ -5,24 +5,7 @@
       <span class="version">{{#unless (eq page.componentVersion.displayVersion 'default')}}{{page.componentVersion.displayVersion}}{{/unless}}</span>
     </div>
   {{/if}}
-  {{!--Old Nav--}}
   <ul class="components">
-    {{#each (rearrange site.components 'name' page.attributes.component-order)}}
-    <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-      <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
-      {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
-        <ul class="versions">
-          {{#each ./versions}}
-            <li class="version
-            {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
-              {{~#if (eq this ../latest)}} is-latest{{/if}}">
-              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
-            </li>
-          {{/each}}
-        </ul>
-      {{/if}}
-    {{/each}}
-
     {{!-- Below is new nav code after revamp--}}
     <div class="dropdown-label" style="font-weight: bold;">TigerGraph DB</div>
     <div class="dropdown-category">
@@ -61,5 +44,21 @@
       <a class="category-item" href="{{relativize site.components.graphql.url}}">GraphQL Service</a>
       <a class="category-item" href="https://github.com/tigergraph/ecosys/tree/master/tools/etl/tg-jdbc-driver">JDBC Driver</a>
     </div>
+    {{!--Old Nav this is display: none but can still be indexed in the DOM--}}
+    {{#each (rearrange site.components 'name' page.attributes.component-order)}}
+    <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
+      <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
+      {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
+        <ul class="versions">
+          {{#each ./versions}}
+            <li class="version
+            {{~#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}} is-current{{/if~}}
+              {{~#if (eq this ../latest)}} is-latest{{/if}}">
+              <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    {{/each}}
   </ul>
 </div>
