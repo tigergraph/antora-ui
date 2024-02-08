@@ -380,10 +380,19 @@ body {
 .dropdown-label {
   margin: 0.5rem 0 0 0;
   font-size: calc(16 / var(--rem-base) * 1rem);
-  color: rgb(70, 70, 70);
-  font-weight: 500;
+  color: #424242;
+  font-weight: bold;
   white-space: nowrap;
   padding-left: 0.75rem;
+}
+
+/* revamp left nav css modeled after the dropdown label */
+.home-left-nav-title {
+  font-size: calc(16 / var(--rem-base) * 1rem);
+  color: #424242;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-left: 0.25rem;
 }
 
 .category-item {
