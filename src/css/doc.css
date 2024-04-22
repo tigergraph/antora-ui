@@ -971,6 +971,7 @@ h1.page + aside.toc.embedded {
   cursor: pointer;
 }
 
+/* Tooltip CSS */
 .tooltip::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -989,4 +990,44 @@ h1.page + aside.toc.embedded {
 
 .tooltip:hover::after {
   opacity: 1;
+}
+
+/* next button CSS */
+.next-button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: left;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.overview-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.overview-button:hover {
+  background-color: #0056b3;
 }
