@@ -14,6 +14,10 @@
   activateSearch(require('docsearch.js/dist/cdn/docsearch.js'), document.getElementById('search-script').dataset)
 
   function activateSearch (docsearch, config) {
+    //Setting "Latest" checkbox to "true" or "checked"
+    if (window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === null) {
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, 'true') // Set default as 'true'
+    }
     appendStylesheet(config.stylesheet)
     var baseAlgoliaOptions = {
       hitsPerPage: parseInt(config.pageSize) || 20, // cannot exceed the hitsPerPage value defined on the index
@@ -128,7 +132,7 @@
       window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY, e.target.checked)
     }
     if (e.path[1].className === 'filter1 checkbox1') {
-      //window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, e.target.checked)
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, e.target.checked)
     }
     isClosed(this) ? this.$input.focus() : requery.call(this)
   }

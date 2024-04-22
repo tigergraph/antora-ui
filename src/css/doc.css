@@ -965,3 +965,28 @@ h1.page + aside.toc.embedded {
     display: block !important;
   }
 }
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  white-space: nowrap;
+  background-color: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
