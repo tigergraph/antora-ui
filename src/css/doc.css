@@ -999,7 +999,7 @@ h1.page + aside.toc.embedded {
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  display: left;
+  display: right;
 }
 
 .next-button:hover {
@@ -1030,4 +1030,13 @@ h1.page + aside.toc.embedded {
 
 .overview-button:hover {
   background-color: #0056b3;
+}
+
+.cloud-image {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border-radius: 1.5rem;
+  border-style: solid;
 }
