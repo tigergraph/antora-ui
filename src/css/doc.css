@@ -966,11 +966,7 @@ h1.page + aside.toc.embedded {
   }
 }
 
-.tooltip {
-  position: relative;
-  cursor: pointer;
-}
-
+/* Tooltip CSS */
 .tooltip::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -989,4 +985,57 @@ h1.page + aside.toc.embedded {
 
 .tooltip:hover::after {
   opacity: 1;
+}
+
+/* next button CSS */
+.next-button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: right;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.overview-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.overview-button:hover {
+  background-color: #0056b3;
+}
+
+/* experimenting with cloud images */
+.cloud-image {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  height: auto;
+  width: 40%;
+  max-width: 100%;
+  vertical-align: middle;
+  border-radius: 1.5rem;
+  border-style: solid;
 }
