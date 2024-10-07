@@ -298,7 +298,6 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .component .title {
-  display: none;
   font-weight: var(--body-font-weight-bold);
   color: inherit;
 }
@@ -313,7 +312,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .component .version {
-  display: none;
+  display: block;
   margin: 0.375rem 0.375rem 0 0;
 }
 
