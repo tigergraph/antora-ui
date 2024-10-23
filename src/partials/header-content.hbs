@@ -13,7 +13,7 @@
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <!-- Language Picker Dropdown -->
-        <div class="navbar-item has-dropdown is-hoverable">
+        <!--div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">
             English
           </a>
@@ -21,7 +21,7 @@
             <a class="navbar-item" href="https://docs.tigergraph.com/">English</a>
             <a class="navbar-item" href="https://jp.docs.tigergraph.com/">日本語</a>
           </div>
-        </div>
+        </div-->
         <div class="navbar-item search hide-for-print">
           {{#if (and page.component (ne page.component.name 'home') (ne page.component.name 'ROOT'))}}
           <div id="search" class="field has-filter">
@@ -40,7 +40,7 @@
           {{/if}}
         </div>
 
-        <a class="navbar-item" href="/home">Home</a>
+        <!--a class="navbar-item" href="/home">Home</a-->
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Products</a>
           <div class="navbar-dropdown">
@@ -64,12 +64,16 @@
             <div class="dropdown-label">TigerGraph Cloud</div>
             <div class="dropdown-category">
               <a class="category-item" href="{{relativize site.components.cloud.url}}">{{site.components.cloud.title}}</a>
+              <a class="category-item" href="https://docs.tigergraph.com/cloudbeta/overview/">{{site.components.cloudBeta.title}}
+                <span style="font-weight: 400; top: -2px; position: relative; margin-left: 8px; color: rgb(255, 255, 254); padding: 2px 4px; font-size: 10px; border-radius: 2px; background-color: rgb(255, 109, 0);">New</span>
+              </a>
             </div>
 
             <div class="dropdown-label">Graph Data Science</div>
             <div class="dropdown-category">
               <a class="category-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
               <a class="category-item" href="{{relativize site.components.ml-workbench.url}}">{{site.components.ml-workbench.title}}</a>
+              <a class="category-item" href="{{relativize site.components.tg-copilot.url}}">{{site.components.tg-copilot.title}}</a>
             </div>
 
             <div class="dropdown-label">Connectors and APIs</div>
@@ -100,6 +104,11 @@
         <div class="navbar-item">
           <span class="control">
             <a class="button is-primary" href="https://dl.tigergraph.com">Download</a>
+          </span>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://tgcloud.io"> TG Cloud</a>
           </span>
         </div>
       </div>
