@@ -205,6 +205,10 @@ html.is-clipped--nav {
   text-decoration: none;
 }
 
+.nav-item.top {
+  z-index: 10;
+}
+
 .nav-link,
 .nav-text {
   padding-top: 0.5rem;
