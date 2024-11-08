@@ -252,6 +252,8 @@ html.is-clipped--nav {
   cursor: pointer;
   line-height: 1;
   height: var(--drawer-height);
+  position: absolute; /* VL */
+  top: 0; /* VL */
 }
 
 .nav-panel-explore .context .title {
