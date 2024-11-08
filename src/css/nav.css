@@ -282,7 +282,8 @@ html.is-clipped--nav {
   overflow-y: scroll;
   max-height: 100%;
   display: block;
-  position: static /* VL */
+  position: relative; /* VL */
+  top: 20; /* VL */
 }
 
 .nav-panel-explore:not(.is-active) .components {
