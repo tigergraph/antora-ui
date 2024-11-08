@@ -1,10 +1,10 @@
 <div class="nav-panel-explore{{#unless page.navigation}} is-active{{/unless}}" data-panel="explore">
-  {{#if page.component}}
+  {{!--#if page.component}}
     <div class="context">
       <span class="title">{{page.component.title}}</span>
       <span class="version">{{#unless (eq page.componentVersion.displayVersion 'default')}}{{page.componentVersion.displayVersion}}{{/unless}}</span>
     </div>
-  {{/if}}
+  {{/if--}}
   <ul class="components">
     {{!--Old Nav. Up here, it DOES display: whether it's visible or not, it can still be indexed in the DOM--}}
     {{#each (rearrange site.components 'name' page.attributes.component-order)}}
