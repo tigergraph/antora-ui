@@ -9,17 +9,17 @@
     {{!--Old Nav. Up here, it DOES display: whether it's visible or not, it can still be indexed in the DOM--}}
     {{#each (rearrange site.components 'name' page.attributes.component-order)}}
     <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
-      <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
-      {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
-        <span class="navbar-item has-dropdown is-hoverable">
+      <span class="navbar-item has-dropdown is-hoverable">
+        <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
+        {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
           <a class="navbar-link" href="{{{relativize ./url}}}">{{page.component.displayVersion}}</a>
           <div class="navbar-dropdown">
           {{#each ./versions}}
               <a class="navbar-item" href="{{{relativize ./url}}}">{{./displayVersion}}</a>
           {{/each}}
           </div>
-        </span>
-      {{/if}}
+        {{/if}}
+      </span>
       {{!--#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
         <ul class="versions">
           {{#each ./versions}}
