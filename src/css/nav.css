@@ -252,7 +252,7 @@ html.is-clipped--nav {
   cursor: pointer;
   line-height: 1;
   height: var(--drawer-height);
-  position: absolute; /* VL */
+  position: relative; /* VL */
   top: 0; /* VL */
 }
 
