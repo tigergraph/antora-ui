@@ -84,7 +84,8 @@ html.is-clipped--nav {
   min-height: 100%;
   padding: 0 0 0.5rem 0;
   line-height: var(--nav-line-height);
-  position: relative;
+  position: absolute;
+  /* VL: position: relative; */
 }
 
 .nav-menu h3.title {
