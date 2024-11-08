@@ -11,14 +11,14 @@
     <li class="component{{#if (eq this @root.page.component)}} is-current{{/if}}">
       <a class="title" href="{{{relativize ./url}}}">{{{./title}}}</a>
       {{#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
-        <div class="navbar-item has-dropdown is-hoverable">
+        <span class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="{{{relativize ./url}}}">{{page.component.displayVersion}}</a>
           <div class="navbar-dropdown">
           {{#each ./versions}}
               <a class="navbar-item" href="{{{relativize ./url}}}">{{./displayVersion}}</a>
           {{/each}}
           </div>
-        </div>
+        </span>
       {{/if}}
       {{!--#if (or ./versions.[1] (ne ./versions.[0].displayVersion 'default'))}}
         <ul class="versions">
