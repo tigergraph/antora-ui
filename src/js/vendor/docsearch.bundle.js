@@ -132,9 +132,6 @@
     if (e.path[1].className === 'filter checkbox') {
       window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY, e.target.checked)
     }
-    if (e.path[1].className === 'filter1 checkbox1') {
-      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, e.target.checked)
-    }
     isClosed(this) ? this.$input.focus() : requery.call(this)
   }
 
