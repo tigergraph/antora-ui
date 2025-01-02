@@ -76,11 +76,11 @@
       .find('.filter input')
       .on('change', toggleFilter.bind(typeahead))
       .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY) === 'true')
-    typeahead.$facetFilterInput1 = input
-      .closest('#' + searchField.id)
-      .find('.filter1 input')
-      .on('change', toggleFilter.bind(typeahead))
-      .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === 'true')
+    // typeahead.$facetFilterInput1 = input
+    //   .closest('#' + searchField.id)
+    //   .find('.filter1 input')
+    //   .on('change', toggleFilter.bind(typeahead))
+    //   .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === 'true')
     menu.find('.ds-pagination--prev').on('click', paginate.bind(typeahead, -1)).css('visibility', 'hidden')
     menu.find('.ds-pagination--next').on('click', paginate.bind(typeahead, 1)).css('visibility', 'hidden')
     monitorCtrlKey.call(typeahead)
@@ -126,12 +126,15 @@
     }
   }
 
-  function toggleFilter (e) {
+ function toggleFilter (e) {
     console.log(e.path[1].className)
     if ('restoring' in this.dropdown) return
     if (e.path[1].className === 'filter checkbox') {
       window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY, e.target.checked)
     }
+    // if (e.path[1].className === 'filter1 checkbox1') {
+    //   window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, e.target.checked)
+    // }
     isClosed(this) ? this.$input.focus() : requery.call(this)
   }
 
