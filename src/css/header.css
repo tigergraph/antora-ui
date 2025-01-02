@@ -346,7 +346,7 @@ body {
   justify-content: center;
 }
 .filter1 {
-  visibility: hidden !important;
+  display: none !important;
 }
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
   max-height: calc(100vh - 6.25rem);
