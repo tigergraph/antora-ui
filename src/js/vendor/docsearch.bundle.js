@@ -50,6 +50,7 @@
       },
       baseAlgoliaOptions: baseAlgoliaOptions,
     })
+    document.querySelector('.filter1').style.display = 'none';
     var input = controller.input
     var typeahead = input.data('aaAutocomplete')
     var dropdown = typeahead.dropdown
