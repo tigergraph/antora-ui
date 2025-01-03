@@ -16,7 +16,7 @@
   function activateSearch (docsearch, config) {
     //Setting "Latest" checkbox to "true" or "checked"
     if (window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === null) {
-      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, 'true') // Set default as 'true'
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, 'false') // Set default as 'true'
     }
     appendStylesheet(config.stylesheet)
     var baseAlgoliaOptions = {
@@ -50,7 +50,7 @@
       },
       baseAlgoliaOptions: baseAlgoliaOptions,
     })
-    document.querySelector('.filter1').style.display = 'none';
+
     var input = controller.input
     var typeahead = input.data('aaAutocomplete')
     var dropdown = typeahead.dropdown
@@ -76,11 +76,11 @@
       .find('.filter input')
       .on('change', toggleFilter.bind(typeahead))
       .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY) === 'true')
-    // typeahead.$facetFilterInput1 = input
-    //   .closest('#' + searchField.id)
-    //   .find('.filter1 input')
-    //   .on('change', toggleFilter.bind(typeahead))
-    //   .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === 'true')
+    typeahead.$facetFilterInput1 = input
+      .closest('#' + searchField.id)
+      .find('.filter1 input')
+      .on('change', toggleFilter.bind(typeahead))
+      .prop('checked', window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === 'true')
     menu.find('.ds-pagination--prev').on('click', paginate.bind(typeahead, -1)).css('visibility', 'hidden')
     menu.find('.ds-pagination--next').on('click', paginate.bind(typeahead, 1)).css('visibility', 'hidden')
     monitorCtrlKey.call(typeahead)
