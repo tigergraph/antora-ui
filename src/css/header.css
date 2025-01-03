@@ -340,14 +340,12 @@ body {
   font-size: 14px;
 }
 
-.filter {
+.filter, .filter1  {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-  .filter1.checkbox1{
-    display: none; 
-  }
+
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
   max-height: calc(100vh - 6.25rem);
 }
