@@ -16,7 +16,7 @@
   function activateSearch (docsearch, config) {
     //Setting "Latest" checkbox to "true" or "checked"
     if (window.localStorage.getItem(SEARCH_FILTER_ACTIVE_KEY1) === null) {
-      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, 'false') // Set default as 'true'
+      window.localStorage.setItem(SEARCH_FILTER_ACTIVE_KEY1, 'true') // Set default as 'true'
     }
     appendStylesheet(config.stylesheet)
     var baseAlgoliaOptions = {
