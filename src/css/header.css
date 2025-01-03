@@ -345,7 +345,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-  .filter1.checkbox1 input[type="checkbox"] {
+  .filter1.checkbox1{
     display: none; 
   }
 .algolia-autocomplete .ds-dropdown-menu [class^=ds-dataset-] {
