@@ -126,7 +126,7 @@
     }
   }
 
- function toggleFilter (e) {
+  function toggleFilter (e) {
     console.log(e.path[1].className)
     if ('restoring' in this.dropdown) return
     if (e.path[1].className === 'filter checkbox') {
