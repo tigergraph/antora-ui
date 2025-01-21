@@ -340,7 +340,8 @@ body {
   font-size: 14px;
 }
 
-.filter, .filter1  {
+.filter,
+.filter1 {
   display: flex;
   align-items: center;
   justify-content: center;
