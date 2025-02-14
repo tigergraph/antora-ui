@@ -17,7 +17,36 @@ MathJax.Hub.Config({
 
 
 <!-- Before the closing </body> -->
+
+<!-- For Docsearch -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
 
 <script async id="search-script" src="{{{uiRootPath}}}/js/vendor/docsearch.js" data-app-id="CTOKZGN7YQ" data-api-key="294d1dcb70726c453eb9db18c0472709" data-index-name="tgdocs" data-stylesheet="{{{uiRootPath}}}/css/vendor/docsearch.css"></script>
+
+<!-- For Google Analytics -->
+<div id="cookie-banner" style="position: fixed; bottom: 10px; left: 10px; background: #222; color: white; padding: 10px; border-radius: 5px;">
+  This site uses Google Analytics. <button id="accept-cookies">Accept</button> <button id="decline-cookies">Decline</button>
+</div>
+
+<script>
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+      gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+      });
+      document.getElementById('cookie-banner').style.display = 'none';
+  });
+
+  document.getElementById('decline-cookies').addEventListener('click', function() {
+      gtag('consent', 'update', {
+          'analytics_storage': 'denied'
+      });
+      document.getElementById('cookie-banner').style.display = 'none';
+  });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-517YJDP198"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-517YJDP198', { 'anonymize_ip': true });
+</script>
+

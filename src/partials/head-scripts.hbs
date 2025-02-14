@@ -1,6 +1,20 @@
-    {{#with site.keys.googleAnalytics}}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied'
+  });
+</script>
+
+
+{{!#with site.keys.googleAnalytics}}
+<!--
     <script async src="https://www.googletagmanager.com/gtag/js?id={{this}}"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','{{this}}')</script>
-    {{/with}}
-    <script>var uiRootPath = '{{{uiRootPath}}}'</script>
-    <link rel="preconnect" href="https://CTOKZGN7YQ-dsn.algolia.net" crossorigin />
+-->
+{{!/with}}
+
+
+<script>var uiRootPath = '{{{uiRootPath}}}'</script>
+<link rel="preconnect" href="https://CTOKZGN7YQ-dsn.algolia.net" crossorigin />
