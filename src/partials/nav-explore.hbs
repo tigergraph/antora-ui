@@ -8,59 +8,53 @@
   <ul class="components">
     {{!-- Below is new nav code after revamp--}}
 
-    // Tutorials & Guides
+    <!-- Tutorials & Guides -->
     <div class="home-left-nav-title" style="font-weight: bold;">Tutorials & Guides</div>
     <div class="dropdown-category">
       <a class="category-item" href="https://github.com/tigergraph/ecosys/blob/master/tutorials/GSQL.md">GSQL</a>
-      <br>
       <a class="category-item" href="https://github.com/tigergraph/ecosys/blob/master/tutorials/Cypher.md">OpenCypher in GSQL</a>
-      <br>
       <a class="category-item" href="https://github.com/tigergraph/ecosys/blob/master/tutorials/Vector.md">Hybrid Vector Search</a>
     </div>
 
-    // Fully-Managed: Savanna
+    <!-- Fully-Managed: Savanna -->
     <div class="home-left-nav-title" style="font-weight: bold;">
-      <a class="category-item" href="https://docs.tigergraph.com/gsql-ref/current/savanna/main/overview/">Fully-Managed: Savanna</a>
+      <a href="https://docs.tigergraph.com/gsql-ref/current/savanna/main/overview/">Fully-Managed: Savanna</a>
     </div>
 
-    // Self-Managed
-    <div class="home-left-nav-title" style="font-weight: bold;">Self-Managed</div>
+    <!-- Self-Managed -->
+    <div class="home-left-nav-title" style="font-weight: bold;">
+      <a class="category-item" href="{{relativize site.components.tigergraph-server.url}}">Self-Managed</a>
+    </div>
     <div class="dropdown-category">
       <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/getting-started/">Installation</a> |
     </div>
 
-    // Reference Manuals
+    <!-- Reference Manuals -->
     <div class="home-left-nav-title" style="font-weight: bold;">Reference Manuals</div>
     <div class="dropdown-category">
-      <i>Query:</i> <a class="category-item" href="{{relativize site.components.gsql.url}}">GSQL</a> |
-      <a class="category-item" href="https://docs.tigergraph.com/gsql-ref/current/opencypher-in-gsql/">OpenCypher</a> |
+      <a class="category-item" href="{{relativize site.components.gsql.url}}">GSQL</a>
+      <a class="category-item" href="https://docs.tigergraph.com/gsql-ref/current/opencypher-in-gsql/">OpenCypher</a>|
       <a class="category-item" href="https://github.com/tigergraph/ecosys/tree/master/tutorials/Vector.md">Vector</a>
-      <br>
       <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/api/">REST APIs</a>
-      <br>
       <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/reference/configuration-parameters">Configuration Parameters</a>
     </div>
-    // Visual Tools
+
+    <!--  Visual Tools -->
     <div class="home-left-nav-title" style="font-weight: bold;">Visual Tools</div>
     <div class="dropdown-category">
-      <i>Develop:</i> <a class="category-item" href="{{relativize site.components.gui.url}}">GraphStudio</a>
-      <br>
-      <i>Administer:</i> <a class="category-item" href="{{relativize site.components.gui.url}}">Admin Portal</a>
-      <br>
-      <i>Visualize:</i> <a class="category-item" href="{{relativize site.components.insights.url}}">Insights</a>
+      <a class="category-item" href="{{relativize site.components.gui.url}}">Develop: GraphStudio</a>
+      <a class="category-item" href="{{relativize site.components.gui.url}}">Administer: Admin Portal</a>
+      <a class="category-item" href="{{relativize site.components.insights.url}}">Visualize: Insights</a>
     </div>
-    // AI & Data Science
+
+    <!-- AI & Data Science -->
     <div class="home-left-nav-title" style="font-weight: bold;">AI & Data Science</div>
     <div class="dropdown-category">
       <a class="category-item" href="{{relativize site.components.graph-ml.url}}">Graph Algorithms</a>
-      <br>
       <a class="category-item" href="{{relativize site.components.pytigergraph.url}}">pyTigerGraph</a>
-      <br>
       <a class="category-item" href="https://github.com/tigergraph/ecosys/blob/master/tutorials/TigerGraphX.md">TigerGraphX</a>
-      <br>
-      <i>Administer:</i> <a class="category-item" href="{{relativize site.components.ml-workbench.url}}">ML Workbench</a>
-      <br>
-      <i>Visualize:</i> <a class="category-item" href="{{relativize site.components.copilot.url}}">CoPilot</a>
+      <a class="category-item" href="{{relativize site.components.ml-workbench.url}}">ML Workbench</a>
+      <a class="category-item" href="{{relativize site.components.copilot.url}}">CoPilot</a>
     </div>
 
     {{!--Old Nav this does NOT display: none but can still be indexed in the DOM--}}
