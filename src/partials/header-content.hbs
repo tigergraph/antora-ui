@@ -45,6 +45,12 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Products</a>
           <div class="navbar-dropdown">
+            <div class="dropdown-label">TigerGraph Savanna</div>
+            <div class="dropdown-category">
+              <a class="category-item" href="{{relativize site.components.savanna.url}}">{{site.components.savanna.title}}</a>
+              <a class="category-item" href="{{relativize site.components.cloud.url}}">(<i>{{site.components.cloud.title}}</i>)</a>
+            </div>
+
             <div class="dropdown-label">TigerGraph Server</div>
             <div class="dropdown-category">
               <a class="category-item" href="{{relativize site.components.tigergraph-server.url}}">{{site.components.tigergraph-server.title}}</a>
@@ -57,26 +63,22 @@
               <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/gsql-shell/web">GSQL Web Shell</a>
             </div>
 
-            <div class="dropdown-label">GSQL</div>
+            <div class="dropdown-label">Query Languages</div>
             <div class="dropdown-category">
               <a class="category-item" href="{{relativize site.components.gsql-ref.url}}">{{site.components.gsql-ref.title}}</a>
+              <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/gsql-shell/web">GSQL Web Shell</a>
+              <a class="category-item" href="https://docs.tigergraph.com/gsql-ref/current/opencypher-in-gsql/opencypher-in-gsql">OpenCypher</a>
             </div>
 
-            <div class="dropdown-label">TigerGraph Savanna</div>
-            <div class="dropdown-category">
-              <a class="category-item" href="{{relativize site.components.savanna.url}}">{{site.components.savanna.title}}</a>
-              <a class="category-item" href="{{relativize site.components.cloud.url}}">(<i>{{site.components.cloud.title}}</i>)</a>
-            </div>
-
-            <div class="dropdown-label">Graph Data Science</div>
+            <div class="dropdown-label">AI & Graph Intelligence</div>
             <div class="dropdown-category">
               <a class="category-item" href="{{relativize site.components.graph-ml.url}}">{{site.components.graph-ml.title}}</a>
-              <a class="category-item" href="{{relativize site.components.ml-workbench.url}}">{{site.components.ml-workbench.title}}</a>
-              <a class="category-item" href="{{relativize site.components.tg-copilot.url}}">{{site.components.tg-copilot.title}}</a>
+              <a class="category-item" href="https://docs.tigergraph.com/gsql-ref/current/vector/">Hybrid Graph+Vector Search</a>
             </div>
 
             <div class="dropdown-label">Connectors and APIs</div>
             <div class="dropdown-category">
+              <a class="category-item" href="https://docs.tigergraph.com/tigergraph-server/current/data-loading">Data Connectors</a>
               <a class="category-item" href="{{relativize site.components.pytigergraph.url}}">{{site.components.pytigergraph.title}}</a>
               <a class="category-item" href="{{relativize site.components.graphql.url}}">{{site.components.graphql.title}}</a>
               <a class="category-item" href="https://github.com/tigergraph/ecosys/tree/master/tools/etl/tg-jdbc-driver">JDBC Driver</a>
