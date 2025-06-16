@@ -1,0 +1,46 @@
+<!-- CookieConsent CSS + JS -->
+<link rel="stylesheet" href="
+https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
+<script>
+  window.addEventListener("load", function () {
+    window.cookieconsent.initialise({
+      palette: {
+        popup: { background: "#000" },
+        button: { background: "#f1d600" }
+      },
+      theme: "classic",
+      content: {
+        message: "This website uses cookies to enhance user experience and for analytics.",
+        dismiss: "Got it!",
+        link: "Learn more",
+        href: "/cookies-policy.html"
+      },
+      onInitialise: function (status) {
+        if (this.hasConsented()) {
+          initGA();
+        }
+      },
+      onStatusChange: function (status, chosenBefore) {
+        if (this.hasConsented()) {
+          initGA();
+        }
+      }
+    });
+
+    function initGA() {
+      var gaId = "{{site.keys.googleAnalytics}}";
+    if (!gaId) return;
+    var script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    document.head.appendChild(script);
+
+    script.onload = function () {
+      gtag('js', new Date());
+      gtag('config', gaId);
+    };
+  }
+});
+</script>
