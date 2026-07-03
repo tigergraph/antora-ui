@@ -30,7 +30,9 @@ body {
 }
 
 #navbar-logo {
-  height: 60%;
+  display: block;
+  height: 36px;
+  width: auto;
 }
 
 .navbar-brand .navbar-item:first-child,
