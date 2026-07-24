@@ -116,6 +116,7 @@ body {
   fill: currentColor;
   width: inherit;
   height: inherit;
+  margin-top: 11px;
 }
 
 .navbar-link {
