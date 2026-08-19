@@ -20,7 +20,7 @@
   padding: 20px 30px 10px 80px;
   color: #2f2f2f;
   border-top: 1px solid #e5e5e5;
-  font-family: acumin-pro, system-ui, sans-serif;
+  font-family: var(--body-font-family);
   margin: 0;
   grid-template-rows: auto 1fr auto;
   font-size: 14px;

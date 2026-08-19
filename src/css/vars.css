@@ -18,16 +18,22 @@
   --color-black: #000;
   --color-orange: #fc6c04;
   --color-light-orange: #ffa94b;
+  /* text scale: one ramp for headings -> body -> muted -> subtle */
+  --color-text-strong: #181818;
+  --color-text: #383838;
+  --color-text-muted: #575858;
+  --color-text-subtle: #8b8c8c;
   /* fonts */
-  --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
-  --body-font-size: 1.0625em; /* 17px */
-  --body-font-size--desktop: 1.125em; /* 18px */
+  --rem-base: 16; /* used to compute rem value from desired pixel value (e.g., calc(16 / var(--rem-base) * 1rem) = 16px) */
+  --body-font-size: 1em; /* 16px */
+  --body-font-size--desktop: 1em; /* 16px */
   --body-font-size--print: 0.9375em; /* 15px */
-  --body-line-height: 1.15;
-  --body-font-color: var(--color-jet-70);
-  --body-font-family: "Roboto", sans-serif;
-  --body-font-weight-bold: 500;
-  --monospace-font-family: "Roboto Mono", monospace;
+  --body-line-height: 1.65;
+  --body-font-color: var(--color-text);
+  --body-font-family: "Inter Variable", Arial, sans-serif;
+  --heading-font-family: "Outfit Variable", var(--body-font-family);
+  --body-font-weight-bold: 600;
+  --monospace-font-family: "JetBrains Mono", ui-monospace, monospace;
   --monospace-font-weight-bold: 500;
   /* base */
   --body-background: var(--color-white);
@@ -49,8 +55,10 @@
   /* nav */
   --nav-background: var(--panel-background);
   --nav-border-color: var(--color-gray-10);
-  --nav-line-height: 1.35;
-  --nav-heading-font-color: #424242;
+  --nav-line-height: 1.5;
+  --nav-heading-font-color: var(--color-jet-80);
+  --nav-item-font-color: var(--color-jet-50);
+  --nav-item-radius: 0.5rem;
   --nav-muted-color: var(--color-gray-70);
   --nav-panel-divider-color: var(--color-smoke-90);
   --nav-secondary-background: var(--color-smoke-70);
@@ -73,25 +81,25 @@
   --warning-color: #e18114;
   --warning-on-color: var(--color-white);
   /* doc */
-  --doc-font-color: var(--color-jet-50);
+  --doc-font-color: var(--color-text);
   --doc-font-size: inherit;
-  --doc-font-size--desktop: calc(17 / var(--rem-base) * 1rem);
-  --doc-line-height: 1.6;
+  --doc-font-size--desktop: 1rem;
+  --doc-line-height: 1.65;
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
-  --heading-font-color: var(--color-jet-80);
-  --heading-font-weight: normal;
-  --alt-heading-font-weight: var(--body-font-weight-bold);
+  --heading-font-color: var(--color-text-strong);
+  --heading-font-weight: 600;
+  --alt-heading-font-weight: 600;
   --section-divider-color: var(--panel-border-color);
   --link-font-color: var(--color-orange);
   --link_hover-font-color: #f48122;
   --link_unresolved-font-color: var(--important-color);
   --abstract-background: var(--color-smoke-70);
-  --abstract-font-color: var(--color-jet-20);
+  --abstract-font-color: var(--color-text);
   --abstract-border-color: var(--panel-border-color);
   --admonition-background: var(--panel-background);
   --admonition-label-font-weight: var(--body-font-weight-bold);
-  --caption-font-color: var(--color-gray-70);
+  --caption-font-color: var(--color-text-muted);
   --caption-font-weight: var(--body-font-weight-bold);
   --code-background: #f1f3f4;
   --code-font-color: #37474f;
@@ -101,11 +109,11 @@
   --kbd-border-color: var(--color-gray-10);
   --pre-background: var(--panel-background);
   --pre-border-color: var(--panel-border-color);
-  --pre-annotation-font-color: var(--color-gray-50);
+  --pre-annotation-font-color: var(--color-text-subtle);
   --quote-background: var(--panel-background);
   --quote-border-color: var(--color-gray-70);
-  --quote-font-color: var(--color-gray-70);
-  --quote-attribution-font-color: var(--color-gray-30);
+  --quote-font-color: var(--color-text-muted);
+  --quote-attribution-font-color: var(--color-text-subtle);
   --sidebar-background: var(--color-smoke-90);
   --table-border-color: var(--panel-border-color);
   --table-stripe-background: var(--panel-background);
@@ -114,7 +122,15 @@
   --toc-font-color: var(--nav-muted-color);
   --toc-heading-font-color: var(--doc-font-color);
   --toc-border-color: var(--panel-border-color);
-  --toc-line-height: 1.2;
+  --toc-line-height: 1.5;
+  /* page actions */
+  --page-actions-font-size: calc(14 / var(--rem-base) * 1rem);
+  --page-actions-hint-font-size: calc(13 / var(--rem-base) * 1rem);
+  --page-actions-icon-size: calc(16 / var(--rem-base) * 1rem);
+  --page-actions-chip-size: calc(32 / var(--rem-base) * 1rem);
+  --page-actions-menu-width: calc(320 / var(--rem-base) * 1rem);
+  --page-actions-menu-width--mobile: calc(290 / var(--rem-base) * 1rem);
+  --page-actions-radius: 0.5rem;
   /* footer */
   --footer-line-height: var(--doc-line-height);
   --footer-background: var(--color-smoke-90);

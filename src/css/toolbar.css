@@ -41,7 +41,8 @@
 
 .home-link {
   display: block;
-  background: url(../img/home-o.svg) no-repeat center;
+  /* the svg has no intrinsic size, so it fills its box unless constrained */
+  background: url(../img/home-o.svg) no-repeat center / 1em 1em;
   height: calc(var(--toolbar-height) / 2);
   width: calc(var(--toolbar-height) / 2);
   margin: calc(var(--toolbar-height) / 4);

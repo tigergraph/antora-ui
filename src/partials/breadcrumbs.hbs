@@ -3,7 +3,7 @@
   <ul>
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li><a href="{{{relativize ./url}}}">{{{./title}}}{{#if (or (eq @root.page.component.name 'savanna') (eq @root.page.component.name 'cloud'))}}{{#unless (eq ./displayVersion 'default')}} {{{./displayVersion}}}{{/unless}}{{else}} {{{./displayVersion}}}{{/if}}</a></li>
+    <li><a href="{{{relativize ./url}}}">{{{./title}}}{{#unless (eq ./displayVersion 'default')}} {{{./displayVersion}}}{{/unless}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}

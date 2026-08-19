@@ -10,11 +10,8 @@
     </div>
   </aside>
 </div>
-{{! Savanna / Classic only: runs inline, while the nav is parsed but before
-    first paint, so restored sections are already open rather than popping open
-    once site.js loads. Other products do not emit data-nav-key, so this is
-    scoped to the cloud theme to keep their markup untouched. }}
-{{#if (or (eq page.component.name 'savanna') (eq page.component.name 'cloud'))}}
+{{! runs inline, while the nav is parsed but before first paint, so restored
+    sections are already open rather than popping open once site.js loads }}
 <script>
 ;(function () {
   try {
@@ -27,4 +24,3 @@
   } catch (e) {}
 })()
 </script>
-{{/if}}

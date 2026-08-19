@@ -3,7 +3,7 @@
   top: var(--navbar-height);
   left: 0;
   width: 100%;
-  font-size: calc(17 / var(--rem-base) * 1rem);
+  font-size: 1rem;
   z-index: var(--z-index-nav);
   visibility: hidden;
 }
@@ -14,9 +14,14 @@
   }
 }
 
+@media screen and (min-width: 800px) {
+  .nav-container {
+    font-size: calc(14 / var(--rem-base) * 1rem);
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .nav-container {
-    font-size: calc(15.5 / var(--rem-base) * 1rem);
     flex: none;
     position: static;
     top: 0;
@@ -82,21 +87,20 @@ html.is-clipped--nav {
 
 .nav-menu {
   min-height: 100%;
-  padding: 0 0 0.5rem 0;
+  /* side padding insets the row pills from the panel edges */
+  padding: 0 0.5rem 0.5rem;
   line-height: var(--nav-line-height);
+  color: var(--nav-item-font-color);
   position: relative;
 }
 
+/* product name is the root of the tree, so it steps up to doc body size */
 .nav-menu h3.title {
   color: var(--nav-heading-font-color);
-  /* font-size: inherit;
-  font-weight: var(--body-font-weight-bold);
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0;
-  padding: 0.25em 0 0.125em; */
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-  padding: 0.25em 0.75rem 0.125em 0.75rem;
+  padding: 0.5rem 0.75rem 0.375rem;
 }
 
 .nav-menu a {
@@ -116,8 +120,15 @@ html.is-clipped--nav {
   list-style: none;
 }
 
+/* link and toggle share one box, so the row highlight is a single shape */
+.nav-row {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--nav-item-radius);
+}
+
 /* adds some breathing room below a nested list */
-.nav-item-toggle ~ .nav-list {
+.nav-row + .nav-list {
   padding-bottom: 0.125rem;
 }
 
@@ -132,72 +143,71 @@ html.is-clipped--nav {
 }
 
 .nav-item-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
   background: transparent;
   border: none;
   outline: none;
+  /* the svg is a chevron-down, so collapsed points it right */
+  transform: rotate(-90deg);
+  transition: transform 0.3s linear;
+}
+
+.nav-item-toggle svg {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.nav-item.is-active > .nav-row > .nav-item-toggle {
   transform: rotate(0);
-  transition: transform 0.3s linear;
 }
 
-.nav-item.is-active > .nav-item-toggle {
-  transform: rotate(180deg);
-  transition: transform 0.3s linear;
+/* depth 1 aligns with the component title; each level indents 0.75rem */
+.nav-item[data-depth="1"] > .nav-row > .nav-link,
+.nav-item[data-depth="1"] > .nav-row > .nav-text {
+  padding-left: 0.75rem;
 }
 
-.nav-item[data-depth="1"] > .nav-link,
-.nav-item[data-depth="1"] > .nav-text {
+.nav-item[data-depth="2"] > .nav-row > .nav-link,
+.nav-item[data-depth="2"] > .nav-row > .nav-text {
   padding-left: 1.5rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="2"] > .nav-link,
-.nav-item[data-depth="2"] > .nav-text {
+.nav-item[data-depth="3"] > .nav-row > .nav-link,
+.nav-item[data-depth="3"] > .nav-row > .nav-text {
   padding-left: 2.25rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="3"] > .nav-link,
-.nav-item[data-depth="3"] > .nav-text {
+.nav-item[data-depth="4"] > .nav-row > .nav-link,
+.nav-item[data-depth="4"] > .nav-row > .nav-text {
   padding-left: 3rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="4"] > .nav-link,
-.nav-item[data-depth="4"] > .nav-text {
+.nav-item[data-depth="5"] > .nav-row > .nav-link,
+.nav-item[data-depth="5"] > .nav-row > .nav-text {
   padding-left: 3.75rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="5"] > .nav-link,
-.nav-item[data-depth="5"] > .nav-text {
+.nav-item[data-depth="6"] > .nav-row > .nav-link,
+.nav-item[data-depth="6"] > .nav-row > .nav-text {
   padding-left: 4.5rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="6"] > .nav-link,
-.nav-item[data-depth="6"] > .nav-text {
+.nav-item[data-depth="7"] > .nav-row > .nav-link,
+.nav-item[data-depth="7"] > .nav-row > .nav-text {
   padding-left: 5.25rem;
-  display: inline-block;
-  width: 80%;
 }
 
-.nav-item[data-depth="7"] > .nav-link,
-.nav-item[data-depth="7"] > .nav-text {
+.nav-item[data-depth="8"] > .nav-row > .nav-link,
+.nav-item[data-depth="8"] > .nav-row > .nav-text {
   padding-left: 6rem;
-  display: inline-block;
-  width: 80%;
-}
-
-.nav-item[data-depth="8"] > .nav-link,
-.nav-item[data-depth="8"] > .nav-text {
-  padding-left: 6.75rem;
-  display: inline-block;
-  width: 80%;
 }
 
 .nav-item a {
@@ -206,21 +216,26 @@ html.is-clipped--nav {
 
 .nav-link,
 .nav-text {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-right: 0.5rem;
 }
 
-.nav-link:hover,
-.nav-text:hover {
+.nav-item:not(.is-current-page) > .nav-row:hover {
   background: var(--navbar-menu_hover-background);
 }
 
-.is-current-page > .nav-link,
-.is-current-page > .nav-text {
-  /* font-weight: var(--body-font-weight-bold); */
-  font-weight: 500;
+/* the link and toggle inherit this colour, so the whole row shifts together */
+.is-current-page > .nav-row {
   color: #7a4812;
   background-color: rgba(247, 129, 22, 0.15);
+}
+
+.is-current-page > .nav-row > .nav-link,
+.is-current-page > .nav-row > .nav-text {
+  font-weight: var(--body-font-weight-bold);
 }
 
 .nav-panel-explore {
@@ -240,7 +255,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-explore .context {
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   flex-shrink: 0;
   color: var(--nav-muted-color);
   box-shadow: 0 -1px 0 var(--nav-panel-divider-color);

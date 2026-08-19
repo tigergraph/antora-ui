@@ -55,8 +55,6 @@
     "require-from-string": "~2.0",
     "stylelint": "~13.8",
     "stylelint-config-standard": "~20.0",
-    "typeface-roboto": "^1.1",
-    "typeface-roboto-mono": "^1.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
