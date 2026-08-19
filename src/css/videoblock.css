@@ -1,6 +1,7 @@
 .doc .videoblock {
   margin: 1.75rem auto 0;
-  max-width: calc(760 / var(--rem-base) * 1rem);
+  width: 100%;
+  max-width: 100%;
 }
 
 /* caption sits above the player; keep it quiet so the video stays the focus */
