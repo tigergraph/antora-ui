@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"{{#if page.component}} class="component-{{page.component.name}}{{#if (or (eq page.component.name 'savanna') (eq page.component.name 'cloud'))}} theme-cloud{{/if}}"{{/if}}>
   <head>
 {{> head defaultPageTitle='Untitled'}}
   </head>
-  <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
+  <body class="article{{#if page.component}} component-{{page.component.name}}{{#if (or (eq page.component.name 'savanna') (eq page.component.name 'cloud'))}} theme-cloud{{/if}}{{/if}}{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
 {{> header}}
 {{> body}}
 {{> footer}}

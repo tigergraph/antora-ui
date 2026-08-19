@@ -24,6 +24,14 @@ const vfs = require('vinyl-fs')
 module.exports = (src, dest, preview) => () => {
   const opts = { base: src, cwd: src }
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true'
+  const copyFont = (asset) => {
+    const relpath = asset.pathname.substr(1)
+    const abspath = require.resolve(relpath)
+    const basename = ospath.basename(abspath)
+    const destpath = ospath.join(dest, 'font', basename)
+    if (!fs.pathExistsSync(destpath)) fs.copySync(abspath, destpath)
+    return path.join('..', 'font', basename)
+  }
   const postcssPlugins = [
     postcssImport,
     (css, { messages, opts: { file } }) =>
@@ -38,14 +46,11 @@ module.exports = (src, dest, preview) => () => {
     postcssUrl([
       {
         filter: '**/~typeface-*/files/*',
-        url: (asset) => {
-          const relpath = asset.pathname.substr(1)
-          const abspath = require.resolve(relpath)
-          const basename = ospath.basename(abspath)
-          const destpath = ospath.join(dest, 'font', basename)
-          if (!fs.pathExistsSync(destpath)) fs.copySync(abspath, destpath)
-          return path.join('..', 'font', basename)
-        },
+        url: copyFont,
+      },
+      {
+        filter: '**/~@fontsource*/**/files/*',
+        url: copyFont,
       },
     ]),
     postcssVar({ preserve: preview }),

@@ -1,0 +1,1005 @@
+/*
+ * Cloud-family theme (TigerGraph Savanna + TigerGraph Cloud Classic).
+ * Applied only when the page has html/body.theme-cloud.
+ * Other Antora components keep the default UI bundle look.
+ */
+
+html.theme-cloud {
+  /* Set explicitly: the CSS pipeline inlines var(--body-font-size) on html. */
+  font-size: 0.9em; /* ~14.4px, matches viewing the 16px base at 90% zoom */
+  --body-font-size: 0.9em;
+  --body-font-size--desktop: 0.9em;
+  /* Keep shared site chrome (top nav) at the original 16px rem base so Savanna
+     and Classic match every other product header. Content below still scales.
+     The concrete offsets live below: the CSS pipeline inlines var() from :root,
+     so overriding --navbar-height here alone would not reposition anything. */
+  /* Design tokens for the cloud theme only. These are intentionally NOT in
+     :root, so the shared bundle leaves every other product untouched; they
+     survive the var() pipeline as runtime variables and resolve within
+     .theme-cloud. rem-base is written as a literal 16 in this file because the
+     pipeline inlines :root's rem-base (18) into any var(--rem-base). */
+  --color-text-strong: #181818;
+  --color-text: #383838;
+  --color-text-muted: #575858;
+  --color-text-subtle: #8b8c8c;
+  --heading-font-family: "Outfit Variable", "Inter Variable", Arial, sans-serif;
+  /* page actions scale (used by the global page-actions.css, which only ever
+     matches markup rendered for savanna/cloud) */
+  --page-actions-font-size: calc(14 / 16 * 1rem);
+  --page-actions-hint-font-size: calc(13 / 16 * 1rem);
+  --page-actions-icon-size: calc(16 / 16 * 1rem);
+  --page-actions-chip-size: calc(32 / 16 * 1rem);
+  --page-actions-menu-width: calc(320 / 16 * 1rem);
+  --page-actions-menu-width--mobile: calc(290 / 16 * 1rem);
+  --page-actions-radius: 0.5rem;
+  --code-background: var(--color-smoke-50);
+  --pre-background: var(--color-smoke-50);
+  --link_unresolved-font-color: var(--caution-color);
+  /* Admonitions by severity: note → tip → important → warning → caution */
+  --note-color: #1b6fd0;
+  --note-tint: #eff6ff;
+  --note-border: #cfe0f8;
+  --note-text: #1c3d6b;
+  --tip-color: #2f8f39;
+  --tip-tint: #f0fdf4;
+  --tip-border: #c9e9ce;
+  --tip-text: #14532d;
+  --important-color: #7e22ce;
+  --important-tint: #faf5ff;
+  --important-border: #e9d5ff;
+  --important-text: #581c87;
+  --warning-color: #b45309;
+  --warning-tint: #fffbeb;
+  --warning-border: #fde68a;
+  --warning-text: #78350f;
+  --caution-color: #c62828;
+  --caution-tint: #fef2f2;
+  --caution-border: #fecaca;
+  --caution-text: #7f1d1d;
+  /* Shared admonition metrics (Savanna + Classic) */
+  --admonition-padding-y: 0.875rem;
+  --admonition-padding-x: 1.125rem;
+  --admonition-gap: 0.75rem;
+  --admonition-icon-size: 1.125rem;
+  --admonition-font-size: calc(15 / 16 * 1rem);
+  --admonition-line-height: 1.5;
+}
+
+/* Shared top header: undo the 0.9 root scale so logo, search, and CTAs match
+   the rest of docs.tigergraph.com. */
+.theme-cloud .navbar {
+  font-size: calc(16 / 16 * 1rem / 0.9);
+  height: 63px;
+}
+
+.theme-cloud #navbar-logo {
+  height: 36px;
+}
+
+/* The navbar is pinned to 63px, but everything below it is offset by the
+   inlined rem value (56.7px at the 0.9 scale), which tucked the toolbar and
+   nav under the navbar border. Re-anchor them to the real navbar height. */
+body.theme-cloud {
+  padding-top: 63px;
+}
+
+.theme-cloud .toolbar {
+  top: 63px;
+}
+
+.theme-cloud .nav-container {
+  top: 63px;
+}
+
+@media screen and (min-width: 1024px) {
+  .theme-cloud .nav-container {
+    top: 0;
+  }
+
+  .theme-cloud .nav {
+    top: 63px;
+    height: calc(100vh - 63px);
+  }
+}
+
+@media screen and (max-width: 1023.5px) {
+  .theme-cloud .nav {
+    height: calc(100vh - 63px - var(--toolbar-height));
+  }
+}
+
+.theme-cloud aside.toc.sidebar {
+  top: calc(63px + var(--toolbar-height));
+}
+
+/* Explore drawer is omitted for Savanna / Classic; give the page nav full height. */
+.theme-cloud .nav-panel-menu {
+  height: 100%;
+}
+
+/* Shared footer: undo rem shrink from the 0.9 root scale. Most footer
+   rules already use px; only rem-based bits need restoring. */
+.theme-cloud .footer__logo {
+  font-size: calc(1.5rem / 0.9);
+}
+
+.theme-cloud .footer__btn {
+  font-size: calc(1rem / 0.9);
+}
+
+.theme-cloud .legal {
+  padding-top: calc(1rem / 0.9);
+}
+
+/* ---- Cloud-only content refinements ---- */
+
+.theme-cloud .doc .tableblock code {
+  color: var(--code-font-color);
+  background: var(--code-background);
+  border-radius: 0.25em;
+  font-size: calc(14 / 16 * 1rem);
+  padding: 0.125em 0.25em;
+}
+
+/* get-started cards: title link + short blurb. This markup only appears in
+   savanna/cloud pages, but the structure is kept scoped so the shared bundle
+   never styles a start-cards table for any other product. */
+.theme-cloud .doc table.start-cards {
+  border-collapse: separate;
+  border-spacing: 0.75rem;
+  margin: 1.25rem 0 0;
+  width: 100%;
+}
+
+.theme-cloud .doc table.start-cards colgroup col {
+  width: auto;
+}
+
+.theme-cloud .doc table.start-cards td {
+  /* anchors the title link's overlay, which makes the whole card clickable */
+  position: relative;
+  border: 1px solid var(--color-smoke-90);
+  border-radius: 0.5rem;
+  background: var(--color-white);
+  box-shadow: none;
+  padding: 1.25rem 1.35rem;
+  vertical-align: top;
+  transition: border-color 0.15s ease;
+}
+
+.theme-cloud .doc table.start-cards th,
+.theme-cloud .doc table.start-cards td {
+  border-top: 1px solid var(--color-smoke-90);
+  border-bottom: 1px solid var(--color-smoke-90);
+}
+
+.theme-cloud .doc table.start-cards td:hover {
+  border-color: var(--color-light-orange);
+}
+
+.theme-cloud .doc table.start-cards td > p.tableblock:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.theme-cloud .doc table.start-cards td > p.tableblock:first-child::after {
+  content: "\2192";
+  flex: none;
+  font-weight: 500;
+  color: var(--link-font-color);
+}
+
+.theme-cloud .doc table.start-cards td:hover > p.tableblock:first-child::after {
+  color: var(--link_hover-font-color);
+}
+
+.theme-cloud .doc table.start-cards td > p.tableblock:first-child a {
+  /* Match the h4 step on the heading ladder (18px) so the card title reads
+     as a mini-heading above the body-size blurb. */
+  font-family: var(--heading-font-family);
+  font-size: calc(18 / 16 * 1rem);
+  font-weight: 600;
+  text-decoration: none;
+  /* long titles wrap at spaces rather than hyphenating mid-word */
+  hyphens: none;
+}
+
+/* stretches the link over the card so a click anywhere follows it */
+.theme-cloud .doc table.start-cards td > p.tableblock:first-child a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.theme-cloud .doc table.start-cards td > p.tableblock:not(:first-child) {
+  margin-bottom: 0;
+  /* Body-size blurb. Without this the cell inherits the base table font-size
+     (15 / rem-base), which renders tiny against the card title. */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+@media screen and (max-width: 767px) {
+  .theme-cloud .doc table.start-cards,
+  .theme-cloud .doc table.start-cards tr,
+  .theme-cloud .doc table.start-cards td {
+    display: block;
+  }
+
+  .theme-cloud .doc table.start-cards td {
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* ---- Tabs (@asciidoctor/tabs markup) ---- */
+
+.theme-cloud .doc .openblock.tabs {
+  margin-bottom: 1.5rem;
+}
+
+.theme-cloud .doc .tablist > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--panel-border-color);
+}
+
+.theme-cloud .doc .tablist > ul li {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  font-size: calc(15 / 16 * 1rem);
+  font-weight: 500;
+  height: auto;
+  line-height: 1.5;
+  margin-bottom: 0;
+  margin-right: 0;
+  padding: 0 0 0.7rem;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.theme-cloud .doc .tablist > ul p {
+  line-height: inherit;
+  margin: 0;
+}
+
+.theme-cloud .doc .tablist > ul li:hover {
+  color: var(--color-text-strong);
+}
+
+.theme-cloud .doc .tablist > ul li:focus-visible {
+  outline: none;
+}
+
+.theme-cloud .doc .tabs .tablist li::after {
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+}
+
+.theme-cloud .doc .tabs.is-loading .tablist li:first-child,
+.theme-cloud .doc .tabs:not(.is-loading) .tablist li.is-selected {
+  background: transparent;
+  color: var(--color-text-strong);
+  font-weight: 600;
+}
+
+.theme-cloud .doc .tabs.is-loading .tablist li:first-child::after,
+.theme-cloud .doc .tabs:not(.is-loading) .tablist li.is-selected::after {
+  background-color: var(--color-orange);
+}
+
+.theme-cloud .doc .tabpanel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 1.5rem 0 0;
+}
+
+.theme-cloud .doc .tabpanel > :first-child {
+  margin-top: 0;
+}
+
+.theme-cloud .doc .tabpanel > :last-child {
+  margin-bottom: 0;
+}
+
+.theme-cloud .doc .tabs.is-loading .tabpanel + .tabpanel,
+.theme-cloud .doc .tabs:not(.is-loading) .tabpanel.is-hidden {
+  display: none;
+}
+
+.theme-cloud .doc .tabpanel .tabs {
+  margin-bottom: 0.5rem;
+}
+
+@media print {
+  .theme-cloud .doc .tabpanel {
+    display: block !important;
+  }
+}
+
+/* ---- Home icon (masked Lucide-style, inherits breadcrumb colour) ---- */
+
+.theme-cloud .home-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Match the default toolbar footprint: a half-height icon with a
+     quarter-height margin so it keeps its left padding from the edge. */
+  height: calc(var(--toolbar-height) / 2);
+  width: calc(var(--toolbar-height) / 2);
+  margin: calc(var(--toolbar-height) / 4);
+  background: none;
+  color: var(--toolbar-font-color);
+}
+
+.theme-cloud .home-link::before {
+  content: '';
+  display: block;
+  width: 1.05em;
+  height: 1.05em;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+.theme-cloud .home-link:hover {
+  background-image: none;
+  color: var(--color-orange);
+}
+
+/* ---- Admonitions (card + icon, no label chip) ---- */
+
+.theme-cloud .doc .admonitionblock {
+  margin: 1.5rem 0 0;
+  width: 100%;
+}
+
+.theme-cloud .doc .ulist .admonitionblock,
+.theme-cloud .doc .olist .admonitionblock {
+  margin-top: 0.75rem;
+}
+
+/* Nested lists indent admonitions; pull them back to the content column width. */
+.theme-cloud .doc .ulist .ulist .admonitionblock,
+.theme-cloud .doc .olist .olist .admonitionblock,
+.theme-cloud .doc .ulist .olist .admonitionblock,
+.theme-cloud .doc .olist .ulist .admonitionblock {
+  margin-left: -2rem;
+  width: calc(100% + 2rem);
+}
+
+.theme-cloud .doc .admonitionblock p,
+.theme-cloud .doc .admonitionblock td.content,
+.theme-cloud .doc .admonitionblock .paragraph {
+  font-size: var(--admonition-font-size);
+  line-height: var(--admonition-line-height);
+}
+
+.theme-cloud .doc .admonitionblock pre {
+  font-size: calc(14 / 16 * 1rem);
+}
+
+.theme-cloud .doc .admonitionblock > table,
+.theme-cloud .doc .admonitionblock > table > tbody {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.theme-cloud .doc .admonitionblock > table > tbody > tr {
+  display: flex;
+  align-items: center;
+  gap: var(--admonition-gap);
+  width: 100%;
+}
+
+.theme-cloud .doc .admonitionblock > table {
+  position: relative;
+  table-layout: auto;
+  padding: var(--admonition-padding-y) var(--admonition-padding-x);
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  min-height: calc(
+    (2 * var(--admonition-padding-y)) +
+    (var(--admonition-line-height) * var(--admonition-font-size))
+  );
+}
+
+.theme-cloud .doc .admonitionblock td.content {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  padding: 0;
+  background: transparent;
+  word-wrap: anywhere;
+}
+
+.theme-cloud .doc .admonitionblock td.icon,
+.theme-cloud .doc .admonitionblock .icon {
+  display: block;
+  flex: none;
+  position: static;
+  width: var(--admonition-icon-size);
+  min-width: var(--admonition-icon-size);
+  height: var(--admonition-icon-size);
+  margin-top: 0;
+  padding: 0;
+  transform: none;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1;
+  font-size: var(--admonition-font-size);
+  font-weight: inherit;
+  text-transform: none;
+}
+
+.theme-cloud .doc .admonitionblock .icon i {
+  display: block;
+  width: var(--admonition-icon-size);
+  height: var(--admonition-icon-size);
+}
+
+.theme-cloud .doc .admonitionblock .icon i::before {
+  content: '';
+  display: block;
+  width: var(--admonition-icon-size);
+  height: var(--admonition-icon-size);
+  background-color: currentColor;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+.theme-cloud .doc .admonitionblock .icon i::after {
+  content: none;
+}
+
+.theme-cloud .doc .admonitionblock td.content > :first-child {
+  margin-top: 0;
+}
+
+.theme-cloud .doc .admonitionblock .paragraph {
+  margin: 0;
+}
+
+.theme-cloud .doc .admonitionblock .imageblock {
+  margin-top: 0.5rem;
+}
+
+.theme-cloud .doc .admonitionblock td.content a {
+  font-weight: 600;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.theme-cloud .doc .admonitionblock.note > table {
+  border-color: var(--note-border);
+  background: var(--note-tint);
+}
+
+.theme-cloud .doc .admonitionblock.note td.icon,
+.theme-cloud .doc .admonitionblock.note .icon {
+  color: var(--note-text);
+}
+
+.theme-cloud .doc .admonitionblock.note td.content {
+  color: var(--note-text);
+}
+
+.theme-cloud .doc .admonitionblock.note .icon i::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+}
+
+.theme-cloud .doc .admonitionblock.tip > table {
+  border-color: var(--tip-border);
+  background: var(--tip-tint);
+}
+
+.theme-cloud .doc .admonitionblock.tip td.icon,
+.theme-cloud .doc .admonitionblock.tip .icon {
+  color: var(--tip-text);
+}
+
+.theme-cloud .doc .admonitionblock.tip td.content {
+  color: var(--tip-text);
+}
+
+.theme-cloud .doc .admonitionblock.tip .icon i::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 22h4'/%3E%3Cpath d='M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1.38.5 2.65 1.5 3.5.76.76 1.23 1.52 1.41 2.5'/%3E%3C/svg%3E");
+}
+
+.theme-cloud .doc .admonitionblock.important > table {
+  border-color: var(--important-border);
+  background: var(--important-tint);
+}
+
+.theme-cloud .doc .admonitionblock.important td.icon,
+.theme-cloud .doc .admonitionblock.important .icon {
+  color: var(--important-text);
+}
+
+.theme-cloud .doc .admonitionblock.important td.content {
+  color: var(--important-text);
+}
+
+.theme-cloud .doc .admonitionblock.important .icon i::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4M12 16h.01'/%3E%3C/svg%3E");
+}
+
+.theme-cloud .doc .admonitionblock.caution > table {
+  border-color: var(--caution-border);
+  background: var(--caution-tint);
+}
+
+.theme-cloud .doc .admonitionblock.caution td.icon,
+.theme-cloud .doc .admonitionblock.caution .icon {
+  color: var(--caution-text);
+}
+
+.theme-cloud .doc .admonitionblock.caution td.content {
+  color: var(--caution-text);
+}
+
+.theme-cloud .doc .admonitionblock.caution .icon i::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86z'/%3E%3Cpath d='M12 8v4M12 16h.01'/%3E%3C/svg%3E");
+}
+
+.theme-cloud .doc .admonitionblock.warning > table {
+  border-color: var(--warning-border);
+  background: var(--warning-tint);
+}
+
+.theme-cloud .doc .admonitionblock.warning td.icon,
+.theme-cloud .doc .admonitionblock.warning .icon {
+  color: var(--warning-text);
+}
+
+.theme-cloud .doc .admonitionblock.warning td.content {
+  color: var(--warning-text);
+}
+
+.theme-cloud .doc .admonitionblock.warning .icon i::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cpath d='M12 9v4M12 17h.01'/%3E%3C/svg%3E");
+}
+
+/* ---- Install badges / buttons (MCP and similar) ---- */
+
+.theme-cloud .doc .image.install-badge > a > img,
+.theme-cloud .doc .image.install-badge > img {
+  margin-top: 0;
+  border-radius: 0;
+  transition: opacity 0.15s ease;
+}
+
+.theme-cloud .doc .image.install-badge > a:hover > img {
+  opacity: 0.82;
+}
+
+.theme-cloud .doc a.install-button {
+  align-items: center;
+  background: var(--color-orange);
+  border: 1px solid var(--color-orange);
+  border-radius: 0.5rem;
+  color: var(--color-white);
+  display: inline-flex;
+  font-size: calc(14 / 16 * 1rem);
+  font-weight: 600;
+  gap: 0.4rem;
+  line-height: 1;
+  padding: 0.55rem 1rem;
+  text-decoration: none;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.theme-cloud .doc a.install-button::before {
+  content: "\2193";
+  font-weight: 700;
+}
+
+.theme-cloud .doc a.install-button:hover {
+  background: var(--link_hover-font-color);
+  border-color: var(--link_hover-font-color);
+  box-shadow: 0 2px 10px rgba(252, 108, 4, 0.25);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.theme-cloud .doc a.install-button:active {
+  transform: translateY(1px);
+}
+
+.theme-cloud .doc p.install-button-row {
+  margin: 0.75rem 0 1rem;
+}
+
+/* ---- Changelog timeline ---- */
+
+.theme-cloud.changelog .doc .sect1 {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  column-gap: 2rem;
+}
+
+.theme-cloud.changelog .doc #preamble + .sect1 {
+  margin-top: 2.5rem;
+}
+
+.theme-cloud.changelog .doc .sect1 + .sect1 {
+  margin-top: 0;
+}
+
+.theme-cloud.changelog .doc .sect1 > h2 {
+  grid-column: 1;
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+  margin: 0;
+  padding: 0.15rem 0 0;
+  border: 0;
+  color: var(--color-text-muted);
+  font-size: calc(14 / 16 * 1rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.theme-cloud.changelog .doc .sect1 > .sectionbody {
+  grid-column: 2;
+  position: relative;
+  border-left: 1px solid var(--panel-border-color);
+  padding: 0 0 2.75rem 2rem;
+}
+
+.theme-cloud.changelog .doc .sect1:last-child > .sectionbody {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.theme-cloud.changelog .doc .sect1 > .sectionbody::before {
+  content: '';
+  position: absolute;
+  left: -0.3125rem;
+  top: 0.4rem;
+  width: 0.5625rem;
+  height: 0.5625rem;
+  border-radius: 50%;
+  background: var(--color-orange);
+  box-shadow: 0 0 0 4px var(--body-background);
+}
+
+.theme-cloud.changelog .doc .sect1 > .sectionbody > .sect2:first-child > h3 {
+  margin-top: 0;
+}
+
+.theme-cloud.changelog .doc .sect1 > .sectionbody > .sect2 + .sect2 {
+  margin-top: 1.75rem;
+}
+
+.theme-cloud.changelog .doc .sect1 h3 {
+  font-size: calc(18 / 16 * 1rem);
+}
+
+@media screen and (max-width: 1023px) {
+  .theme-cloud.changelog .doc .sect1 {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .theme-cloud.changelog .doc .sect1 > h2 {
+    grid-column: 1;
+    position: static;
+    padding-bottom: 0.5rem;
+  }
+
+  .theme-cloud.changelog .doc .sect1 > .sectionbody {
+    grid-column: 1;
+    border-left: 0;
+    padding-left: 0;
+    padding-bottom: 2rem;
+  }
+
+  .theme-cloud.changelog .doc .sect1 > .sectionbody::before {
+    content: none;
+  }
+}
+
+/* ============================================================================
+ * Cloud typography + layout layer
+ *
+ * The shared base stylesheets (vars/base/body/doc/nav/toc) are byte-identical
+ * to the upstream bundle so every other product renders exactly as before.
+ * Everything the cloud theme changes about type, headings, code, nav, and the
+ * table of contents lives here, scoped to .theme-cloud, and uses a literal 16
+ * rem-base (the pipeline inlines :root's rem-base of 18 into any var()).
+ * ==========================================================================*/
+
+/* ---- Body + inline type ---- */
+body.theme-cloud {
+  font-family: "Inter Variable", Arial, sans-serif;
+  color: var(--color-text);
+  line-height: 1.65;
+}
+
+.theme-cloud code,
+.theme-cloud kbd,
+.theme-cloud pre {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.theme-cloud b,
+.theme-cloud dt,
+.theme-cloud strong,
+.theme-cloud th {
+  font-weight: 600;
+}
+
+.theme-cloud .doc {
+  color: var(--color-text);
+  line-height: 1.65;
+}
+
+@media screen and (min-width: 1024px) {
+  .theme-cloud .doc {
+    font-size: 1rem;
+  }
+}
+
+/* ---- Headings ---- */
+.theme-cloud .doc h1,
+.theme-cloud .doc h2,
+.theme-cloud .doc h3,
+.theme-cloud .doc h4,
+.theme-cloud .doc h5,
+.theme-cloud .doc h6 {
+  font-family: var(--heading-font-family);
+  color: var(--color-text-strong);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.theme-cloud .doc > h1.page:first-child {
+  font-size: calc(32 / 16 * 1rem);
+}
+
+.theme-cloud .doc h1.sect0 {
+  font-size: calc(32 / 16 * 1rem);
+}
+
+.theme-cloud .doc h2 {
+  font-size: calc(24 / 16 * 1rem);
+  border-bottom: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.theme-cloud .doc h3 {
+  font-size: calc(20 / 16 * 1rem);
+}
+
+.theme-cloud .doc h4 {
+  font-size: calc(18 / 16 * 1rem);
+}
+
+.theme-cloud .doc h5 {
+  font-size: 1rem;
+}
+
+.theme-cloud .doc h6 {
+  font-size: calc(14 / 16 * 1rem);
+}
+
+/* page header: title on the left, page-actions pinned right */
+.theme-cloud .doc > .page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.theme-cloud .doc > .page-header > h1.page {
+  font-size: calc(32 / 16 * 1rem);
+  margin: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .theme-cloud .doc > .page-header:first-child {
+    margin-top: 2.5rem;
+  }
+}
+
+.theme-cloud .page-header + aside.toc.embedded {
+  margin-top: -0.5rem;
+}
+
+/* ---- Code ---- */
+.theme-cloud .doc p code,
+.theme-cloud .doc thead code {
+  font-size: calc(14 / 16 * 1rem);
+}
+
+.theme-cloud .doc pre {
+  font-size: calc(14 / 16 * 1rem);
+}
+
+/* ---- Table of contents ---- */
+.theme-cloud .toc .toc-menu h3 {
+  font-size: calc(14 / 16 * 1rem);
+}
+
+.theme-cloud .toc .toc-menu ul {
+  font-size: calc(14 / 16 * 1rem);
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 1024px) {
+  .theme-cloud .toc .toc-menu h3 {
+    font-size: calc(14 / 16 * 1rem);
+  }
+
+  .theme-cloud .toc .toc-menu ul {
+    font-size: calc(13 / 16 * 1rem);
+  }
+}
+
+/* ============================================================================
+ * Page navigation tree
+ *
+ * The cloud tree wraps each link + toggle in a .nav-row (emitted only for
+ * savanna/cloud in nav-tree.hbs), so these selectors never match another
+ * product's markup. Depth padding, hover, and current-page styling are keyed
+ * off .nav-row for that reason.
+ * ==========================================================================*/
+.theme-cloud .nav-container {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 800px) {
+  .theme-cloud .nav-container {
+    font-size: calc(14 / 16 * 1rem);
+  }
+}
+
+.theme-cloud .nav-menu {
+  /* side padding insets the row pills from the panel edges */
+  padding: 0 0.5rem 0.5rem;
+  line-height: 1.5;
+  color: var(--color-jet-50);
+}
+
+/* product name is the root of the tree, so it steps up to doc body size */
+.theme-cloud .nav-menu h3.title {
+  color: var(--color-jet-80);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem 0.375rem;
+}
+
+/* link and toggle share one box, so the row highlight is a single shape */
+.theme-cloud .nav-row {
+  display: flex;
+  align-items: stretch;
+  border-radius: 0.5rem;
+}
+
+.theme-cloud .nav-row + .nav-list {
+  padding-bottom: 0.125rem;
+}
+
+.theme-cloud .nav-item-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  /* the svg is a chevron-down, so collapsed points it right */
+  transform: rotate(-90deg);
+}
+
+.theme-cloud .nav-item-toggle svg {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.theme-cloud .nav-item.is-active > .nav-row > .nav-item-toggle {
+  transform: rotate(0);
+}
+
+/* depth 1 aligns with the component title; each level indents 0.75rem */
+.theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-text {
+  padding-left: 0.75rem;
+}
+
+.theme-cloud .nav-item[data-depth="2"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="2"] > .nav-row > .nav-text {
+  padding-left: 1.5rem;
+}
+
+.theme-cloud .nav-item[data-depth="3"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="3"] > .nav-row > .nav-text {
+  padding-left: 2.25rem;
+}
+
+.theme-cloud .nav-item[data-depth="4"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="4"] > .nav-row > .nav-text {
+  padding-left: 3rem;
+}
+
+.theme-cloud .nav-item[data-depth="5"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="5"] > .nav-row > .nav-text {
+  padding-left: 3.75rem;
+}
+
+.theme-cloud .nav-item[data-depth="6"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="6"] > .nav-row > .nav-text {
+  padding-left: 4.5rem;
+}
+
+.theme-cloud .nav-item[data-depth="7"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="7"] > .nav-row > .nav-text {
+  padding-left: 5.25rem;
+}
+
+.theme-cloud .nav-item[data-depth="8"] > .nav-row > .nav-link,
+.theme-cloud .nav-item[data-depth="8"] > .nav-row > .nav-text {
+  padding-left: 6rem;
+}
+
+.theme-cloud .nav-link,
+.theme-cloud .nav-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-right: 0.5rem;
+}
+
+/* row-level hover replaces the base link-level hover */
+.theme-cloud .nav-link:hover,
+.theme-cloud .nav-text:hover {
+  background: transparent;
+}
+
+.theme-cloud .nav-item:not(.is-current-page) > .nav-row:hover {
+  background: var(--navbar-menu_hover-background);
+}
+
+/* the link and toggle inherit this colour, so the whole row shifts together */
+.theme-cloud .is-current-page > .nav-row {
+  color: #7a4812;
+  background-color: rgba(247, 129, 22, 0.15);
+}
+
+.theme-cloud .is-current-page > .nav-row > .nav-link,
+.theme-cloud .is-current-page > .nav-row > .nav-text {
+  font-weight: 600;
+}

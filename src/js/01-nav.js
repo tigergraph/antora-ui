@@ -22,8 +22,10 @@
     menuPanel.scrollTop = 0
   }
 
+  storeOpenSections()
+
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
-    var li = btn.parentElement
+    var li = btn.closest('.nav-item')
     btn.addEventListener('click', toggleActive.bind(li))
     var navItemSpan = findPreviousElement(btn, '.nav-text')
     if (navItemSpan) {
@@ -59,7 +61,7 @@
     }
     var navItem
     if (navLink) {
-      navItem = navLink.parentNode
+      navItem = navLink.closest('.nav-item')
     } else if (originalPageItem) {
       navLink = (navItem = originalPageItem).querySelector('.nav-link')
     } else {
@@ -100,6 +102,22 @@
       var overflowY = (rect.bottom - menuPanelRect.top - menuPanelRect.height + padding).toFixed()
       if (overflowY > 0) menuPanel.scrollTop += Math.min((rect.top - menuPanelRect.top - padding).toFixed(), overflowY)
     }
+    storeOpenSections()
+  }
+
+  // a page click reloads the document, so the open sections only survive if
+  // they are written down; the inline script in nav.hbs reads them back
+  function storeOpenSections () {
+    try {
+      window.sessionStorage.setItem(
+        'nav-open-sections',
+        JSON.stringify(
+          find(menuPanel, '.nav-item.is-active[data-nav-key]').map(function (el) {
+            return el.getAttribute('data-nav-key')
+          })
+        )
+      )
+    } catch (e) {}
   }
 
   function showNav (e) {

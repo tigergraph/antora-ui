@@ -5,9 +5,13 @@
   var LINE_CONTINUATION_RX = /( ) *\\\n *|\\\n( ?) */g
   var TRAILING_SPACE_RX = / +$/gm
   var config = (document.getElementById('site-script') || { dataset: {} }).dataset
+  var isCloudTheme = document.documentElement.classList.contains('theme-cloud')
+  var copyTargets = '.doc pre.highlight, .doc .literalblock pre'
+  if (isCloudTheme) copyTargets += ', .doc .listingblock pre'
 
-  ;[].slice.call(document.querySelectorAll('.doc pre.highlight, .doc .literalblock pre')).forEach(function (pre) {
+  ;[].slice.call(document.querySelectorAll(copyTargets)).forEach(function (pre) {
     var code, language, lang, copy, toast, toolbox
+    if (pre.querySelector('.source-toolbox')) return
     if (pre.classList.contains('highlight')) {
       code = pre.querySelector('code')
       if ((language = code.dataset.lang) && language !== 'console') {
@@ -22,6 +26,12 @@
       ;(code = document.createElement('code')).className = 'language-console hljs'
       code.dataset.lang = 'console'
       code.appendChild(pre.firstChild)
+      pre.appendChild(code)
+    } else if (isCloudTheme && pre.closest('.listingblock')) {
+      // Plain listing blocks (example prompts, diagrams) get the same copy control.
+      pre.classList.add('highlight')
+      code = document.createElement('code')
+      while (pre.firstChild) code.appendChild(pre.firstChild)
       pre.appendChild(code)
     } else {
       return

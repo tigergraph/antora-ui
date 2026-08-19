@@ -1,0 +1,189 @@
+/* sizing comes from the --page-actions-* scale in vars.css so the trigger and menu stay in step */
+.page-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  /* nudge down so the control optically aligns with the first line of the page title */
+  margin-top: 0.35rem;
+}
+
+.page-actions-control {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--panel-border-color);
+  border-radius: var(--page-actions-radius);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.page-actions-copy,
+.page-actions-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: var(--doc-font-color);
+  font: inherit;
+  font-size: var(--page-actions-font-size);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.page-actions-copy {
+  padding: 0.45rem 0.7rem;
+}
+
+.page-actions-toggle {
+  padding: 0.45rem 0.5rem;
+  border-left: 1px solid var(--panel-border-color);
+}
+
+.page-actions-copy:hover,
+.page-actions-toggle:hover,
+.page-actions-copy:focus-visible,
+.page-actions-toggle:focus-visible,
+.page-actions.is-active .page-actions-toggle {
+  background: var(--color-smoke-50);
+  outline: none;
+}
+
+.page-actions-icon,
+.page-actions-chevron {
+  width: var(--page-actions-icon-size);
+  height: var(--page-actions-icon-size);
+  flex: none;
+}
+
+.page-actions-chevron {
+  transition: transform 0.15s ease;
+}
+
+.page-actions.is-active .page-actions-chevron {
+  transform: rotate(180deg);
+}
+
+.page-actions-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: var(--z-index-nav);
+  min-width: var(--page-actions-menu-width);
+  padding: 0.4rem;
+  border: 1px solid var(--panel-border-color);
+  border-radius: 0.875rem;
+  background: var(--color-white);
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 12px 28px -4px rgba(0, 0, 0, 0.1);
+}
+
+.page-actions-menu[hidden] {
+  display: none;
+}
+
+.page-actions-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  border: 0;
+  border-radius: 0.625rem;
+  background: transparent;
+  color: var(--doc-font-color);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* the control lives inside article.doc, so opt out of the doc link styling */
+.doc .page-actions-item,
+.doc .page-actions-item:hover {
+  color: var(--doc-font-color);
+  text-decoration: none;
+}
+
+.page-actions-item:hover,
+.page-actions-item:focus-visible {
+  background: var(--color-smoke-50);
+  outline: none;
+}
+
+.page-actions-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--page-actions-chip-size);
+  height: var(--page-actions-chip-size);
+  border: 1px solid var(--panel-border-color);
+  border-radius: var(--page-actions-radius);
+  color: var(--color-gray-70);
+  background: var(--color-white);
+}
+
+.page-actions-chip svg {
+  width: var(--page-actions-icon-size);
+  height: var(--page-actions-icon-size);
+}
+
+.page-actions-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.page-actions-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  font-size: var(--page-actions-font-size);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.page-actions-external {
+  /* display:block kills the inline-svg baseline gap that made ↗ look like a superscript */
+  display: block;
+  width: 0.75em;
+  height: 0.75em;
+  flex: none;
+  overflow: visible;
+  color: var(--color-gray-50);
+  /* ↗ is optically top-heavy; drop it onto the title's cap height */
+  margin-block-start: 0.08em;
+}
+
+.page-actions-hint {
+  font-size: var(--page-actions-hint-font-size);
+  color: var(--caption-font-color);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 767.5px) {
+  .page-actions-menu {
+    min-width: var(--page-actions-menu-width--mobile);
+  }
+
+  .page-actions-copy-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .page-actions-copy {
+    padding: 0.45rem;
+  }
+}

@@ -44,7 +44,9 @@
   menu.appendChild(title)
   menu.appendChild(list)
 
-  var startOfContent = !document.getElementById('toc') && article.querySelector('h1.page ~ :not(.is-before-toc)')
+  var startOfContent =
+    !document.getElementById('toc') &&
+    article.querySelector('.page-header ~ :not(.is-before-toc), h1.page ~ :not(.is-before-toc)')
   if (startOfContent) {
     var embeddedToc = document.createElement('aside')
     embeddedToc.className = 'toc embedded'

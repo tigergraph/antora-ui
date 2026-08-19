@@ -1,6 +1,31 @@
 {{#if navigation.length}}
 <ul class="nav-list">
   {{#each navigation}}
+  {{#if (or (eq @root.page.component.name 'savanna') (eq @root.page.component.name 'cloud'))}}
+  {{! Cloud theme: wrap link + toggle in a .nav-row and persist open sections.
+      The open state is rendered here rather than left to nav.js, so the tree
+      does not visibly expand and spin its chevrons after the first paint. }}
+  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page is-active{{/if}}{{#if (has-current-page ./items @root.page.url)}} is-active is-current-path{{/if}}" data-depth="{{or ../level 0}}"{{#if (and ./content ./items.length)}} data-nav-key="{{#if ./url}}{{./url}}{{else}}{{or ../level 0}}:{{detag ./content}}{{/if}}"{{/if}}>
+    {{#if ./content}}
+    <div class="nav-row">
+    {{#if ./url}}
+    <a class="nav-link" href="
+      {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
+      {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
+    {{else}}
+    <span class="nav-text">{{{./content}}}</span>
+    {{/if}}
+    {{#if ./items.length}}
+    <button class="nav-item-toggle">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+</svg> 
+    </button>
+    {{/if}}
+    </div>
+    {{/if}}
+  {{else}}
+  {{! Default upstream markup — unchanged for every other product. }}
   <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}" data-depth="{{or ../level 0}}">
     {{#if ./content}}
     {{#if ./url}}
@@ -18,6 +43,7 @@
     </button>
     {{/if}}
     {{/if}}
+  {{/if}}
 {{> nav-tree navigation=./items level=(increment ../level)}}
   </li>
   {{/each}}

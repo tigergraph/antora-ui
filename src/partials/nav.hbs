@@ -2,7 +2,29 @@
   <aside class="nav">
     <div class="panels">
 {{> nav-menu}}
+{{!-- Cross-product switcher. Redundant with the header Products menu; hide for
+     Savanna / Classic. Other products keep the explore drawer. --}}
+{{#unless (or (eq page.component.name 'savanna') (eq page.component.name 'cloud'))}}
 {{> nav-explore}}
+{{/unless}}
     </div>
   </aside>
 </div>
+{{! Savanna / Classic only: runs inline, while the nav is parsed but before
+    first paint, so restored sections are already open rather than popping open
+    once site.js loads. Other products do not emit data-nav-key, so this is
+    scoped to the cloud theme to keep their markup untouched. }}
+{{#if (or (eq page.component.name 'savanna') (eq page.component.name 'cloud'))}}
+<script>
+;(function () {
+  try {
+    var open = JSON.parse(window.sessionStorage.getItem('nav-open-sections') || '[]')
+    if (!open.length) return
+    var items = document.querySelectorAll('.nav-container [data-nav-key]')
+    for (var i = 0; i < items.length; i++) {
+      if (open.indexOf(items[i].getAttribute('data-nav-key')) !== -1) items[i].classList.add('is-active')
+    }
+  } catch (e) {}
+})()
+</script>
+{{/if}}
