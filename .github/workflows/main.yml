@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 # PRs: cancel superseded runs. Main: let each merge run to completion so its
 # Netlify ping is not cancelled by the next merge.
@@ -52,13 +53,17 @@ jobs:
       # ship stale styling. We cannot compare the zip itself: it stores file
       # timestamps (never byte-identical) and image minification differs
       # between a contributor's Mac and this Linux runner (unzip-compare would
-      # false-fail). Checking the PR file list is reliable and not flaky.
+      # false-fail). Ask GitHub for the PR's changed files instead: it is exact
+      # and needs no local git history (the checkout is shallow).
       - name: Ensure bundle was rebuilt
         if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git fetch --depth=1 origin "${{ github.base_ref }}"
-          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          changed=$(gh api --paginate \
+            "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+            --jq '.[].filename')
           if echo "$changed" | grep -q '^src/' && ! echo "$changed" | grep -qx 'build/ui-bundle.zip'; then
             echo "::error::src/ changed but build/ui-bundle.zip was not rebuilt. Run 'npx gulp bundle' and commit the updated bundle."
             exit 1
