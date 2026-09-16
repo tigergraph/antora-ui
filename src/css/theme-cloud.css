@@ -10,6 +10,7 @@
 
 html.theme-cloud {
   font-size: 0.95em; /* ~15.2px; 95% of the 16px base */
+
   --body-font-size: 0.95em;
   --body-font-size--desktop: 0.95em;
 
@@ -116,6 +117,7 @@ body.theme-cloud {
 
 .theme-cloud .nav-container {
   top: 63px;
+  font-size: 1rem;
 }
 
 @media screen and (min-width: 1024px) {
@@ -161,10 +163,6 @@ body.theme-cloud {
 /* ---- Navigation tree (scoped; the shared nav.css stays neutral) ----
    These mirror the cloud nav look and rely on the .nav-row wrapper that
    nav-tree.hbs only emits for savanna/cloud. */
-.theme-cloud .nav-container {
-  font-size: 1rem;
-}
-
 @media screen and (min-width: 800px) {
   .theme-cloud .nav-container {
     font-size: calc(14 / var(--rem-base) * 1rem);
@@ -226,18 +224,25 @@ body.theme-cloud {
 /* depth 1 aligns with the component title; each level indents 0.75rem */
 .theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-text { padding-left: 0.75rem; }
+
 .theme-cloud .nav-item[data-depth="2"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="2"] > .nav-row > .nav-text { padding-left: 1.5rem; }
+
 .theme-cloud .nav-item[data-depth="3"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="3"] > .nav-row > .nav-text { padding-left: 2.25rem; }
+
 .theme-cloud .nav-item[data-depth="4"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="4"] > .nav-row > .nav-text { padding-left: 3rem; }
+
 .theme-cloud .nav-item[data-depth="5"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="5"] > .nav-row > .nav-text { padding-left: 3.75rem; }
+
 .theme-cloud .nav-item[data-depth="6"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="6"] > .nav-row > .nav-text { padding-left: 4.5rem; }
+
 .theme-cloud .nav-item[data-depth="7"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="7"] > .nav-row > .nav-text { padding-left: 5.25rem; }
+
 .theme-cloud .nav-item[data-depth="8"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="8"] > .nav-row > .nav-text { padding-left: 6rem; }
 
@@ -411,6 +416,11 @@ body.theme-cloud {
 
 .theme-cloud .doc table.start-cards td > p.tableblock:first-child a {
   font-weight: 600;
+  /* Match the h4 step on the heading ladder (18px) so the card title reads
+     as a mini-heading above the body-size blurb. */
+  font-family: var(--heading-font-family);
+  font-size: calc(18 / var(--rem-base) * 1rem);
+  text-decoration: none;
 }
 
 /* stretches the link over the card so a click anywhere follows it */
@@ -423,6 +433,7 @@ body.theme-cloud {
 .theme-cloud .doc table.start-cards td > p.tableblock:not(:first-child) {
   margin-bottom: 0;
   line-height: 1.5;
+  color: var(--color-text-muted);
 }
 
 @media screen and (max-width: 767px) {
@@ -449,18 +460,6 @@ body.theme-cloud {
 
 .theme-cloud .doc table.start-cards td:hover {
   border-color: var(--color-light-orange);
-}
-
-.theme-cloud .doc table.start-cards td > p.tableblock:first-child a {
-  /* Match the h4 step on the heading ladder (18px) so the card title reads
-     as a mini-heading above the body-size blurb. */
-  font-family: var(--heading-font-family);
-  font-size: calc(18 / var(--rem-base) * 1rem);
-  text-decoration: none;
-}
-
-.theme-cloud .doc table.start-cards td > p.tableblock:not(:first-child) {
-  color: var(--color-text-muted);
 }
 
 /* ---- Tabs (@asciidoctor/tabs markup) ---- */
@@ -742,10 +741,11 @@ body.theme-cloud {
   padding: var(--admonition-padding-y) var(--admonition-padding-x);
   border: 1px solid transparent;
   border-radius: 0.75rem;
-  min-height: calc(
-    (2 * var(--admonition-padding-y)) +
-    (var(--admonition-line-height) * var(--admonition-font-size))
-  );
+  min-height:
+    calc(
+      (2 * var(--admonition-padding-y)) +
+      (var(--admonition-line-height) * var(--admonition-font-size))
+    );
 }
 
 .theme-cloud .doc .admonitionblock td.content {
@@ -800,10 +800,6 @@ body.theme-cloud {
 
 .theme-cloud .doc .admonitionblock td.content > :first-child {
   margin-top: 0;
-}
-
-.theme-cloud .doc .admonitionblock .paragraph {
-  margin: 0;
 }
 
 .theme-cloud .doc .admonitionblock .imageblock {

@@ -3,5 +3,19 @@
   "rules": {
     "comment-empty-line-before": null,
     "no-descending-specificity": null,
+    "value-keyword-case": ["lower", { "ignoreKeywords": ["Arial", "currentColor"] }],
+    "custom-property-pattern": null,
+    "selector-class-pattern": null,
+    "keyframes-name-pattern": null,
+    "function-url-quotes": null,
+    "font-family-name-quotes": null,
+    "string-quotes": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "value-no-vendor-prefix": null,
+    "property-no-vendor-prefix": null,
+    "selector-attribute-quotes": null,
+    "shorthand-property-no-redundant-values": null,
+    "max-line-length": null
   }
 }
