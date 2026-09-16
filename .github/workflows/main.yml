@@ -64,17 +64,6 @@ jobs:
             exit 1
           fi
 
-      # Only useful on PRs, for reviewers to download and preview. The docs
-      # sites read the committed zip from main, not this artifact, so there is
-      # no reason to upload it on a push to main.
-      - name: Upload bundle artifact
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v6
-        with:
-          name: ui-bundle
-          path: build/ui-bundle.zip
-          if-no-files-found: error
-
       # One Netlify deploy per merge to main. The committed bundle is already
       # on main (it came in with the PR), so this just tells the docs sites to
       # rebuild and pull it.
