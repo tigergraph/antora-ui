@@ -1,13 +1,12 @@
 name: CI
 
-# On pull requests: lint and build the UI bundle so a broken gulp/bundle
-# cannot merge. The zip is not committed from PRs.
+# On pull requests: lint and build the UI so a broken gulp/bundle cannot
+# merge. CI does NOT commit the bundle. Contributors rebuild it locally with
+# `npx gulp bundle` (Node 20) and commit build/ui-bundle.zip in their PR.
 #
-# On push to main: rebuild build/ui-bundle.zip from source, commit it back
-# if it changed, then ping Netlify once so docs sites that consume
+# On push to main: ping Netlify once so docs sites that consume
 # https://github.com/tigergraph/antora-ui/blob/main/build/ui-bundle.zip?raw=true
-# pick up the new bundle. The zip commit uses [skip ci] and is ignored by
-# the Netlify step so that second push cannot start a second docs deploy.
+# pick up the bundle that was committed in the merged PR.
 on:
   push:
     branches: [ main ]
@@ -16,10 +15,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pull-requests: read
 
-# PRs: cancel superseded runs. Main: queue so two merges cannot publish
-# ui-bundle.zip at the same time (the zip is a binary and cannot rebase).
+# PRs: cancel superseded runs. Main: let each merge run to completion so its
+# Netlify ping is not cancelled by the next merge.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -42,66 +42,40 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit
 
+      # Lints and builds the bundle so a broken gulp/lint cannot merge. This
+      # is the required `build` check. On main it also acts as a smoke test
+      # that the branch still builds after a merge. It does not publish.
       - name: Build UI bundle
         run: npx gulp bundle
 
-      - name: Upload bundle artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: ui-bundle
-          path: build/ui-bundle.zip
-          if-no-files-found: error
-
-      # Do not rebase ui-bundle.zip: it is binary, so a concurrent main
-      # commit that also touches the zip would conflict. Fetch latest main,
-      # rebuild if the branch moved, then commit and retry the push.
-      - name: Publish bundle to main
-        id: publish
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      # Catch the common mistake in the "contributor commits the bundle" model:
+      # src/ changed but build/ui-bundle.zip was not rebuilt, so the docs would
+      # ship stale styling. We cannot compare the zip itself: it stores file
+      # timestamps (never byte-identical) and image minification differs
+      # between a contributor's Mac and this Linux runner (unzip-compare would
+      # false-fail). Ask GitHub for the PR's changed files instead: it is exact
+      # and needs no local git history (the checkout is shallow).
+      - name: Ensure bundle was rebuilt
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          echo "published=false" >> "$GITHUB_OUTPUT"
+          changed=$(gh api --paginate \
+            "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" \
+            --jq '.[].filename')
+          if echo "$changed" | grep -q '^src/' && ! echo "$changed" | grep -qx 'build/ui-bundle.zip'; then
+            echo "::error::src/ changed but build/ui-bundle.zip was not rebuilt. Run 'npx gulp bundle' and commit the updated bundle."
+            exit 1
+          fi
 
-          git fetch origin main
-
-          for attempt in 1 2 3; do
-            if [ "$attempt" -gt 1 ] || [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-              echo "Rebuilding the bundle from origin/main (attempt ${attempt})"
-              git reset --hard origin/main
-              npm ci --no-audit
-              npx gulp bundle
-            fi
-
-            git add build/ui-bundle.zip
-            if git diff --cached --quiet; then
-              echo "UI bundle unchanged; nothing to commit."
-              exit 0
-            fi
-
-            git commit -m "build(ui): rebuild UI bundle from source [skip ci]"
-            if git push origin HEAD:main; then
-              echo "published=true" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-
-            echo "Push rejected (attempt ${attempt}); retrying against latest main"
-            git fetch origin main
-          done
-
-          echo "Failed to publish ui-bundle.zip after retries" >&2
-          exit 1
-
-      # One Netlify deploy per UI change: only after a new zip is on main.
-      # Do not ping for PRs, the [skip ci] zip commit, or github-actions[bot]
-      # (that second push would otherwise rebuild the docs site again).
+      # One Netlify deploy per merge to main. The committed bundle is already
+      # on main (it came in with the PR), so this just tells the docs sites to
+      # rebuild and pull it.
       - name: Trigger Netlify build hook
         if: >
-          github.ref == 'refs/heads/main' &&
-          github.actor != 'github-actions[bot]' &&
-          !contains(github.event.head_commit.message, '[skip ci]') &&
-          (github.event_name == 'workflow_dispatch' || steps.publish.outputs.published == 'true')
+          github.event_name != 'pull_request' &&
+          github.ref == 'refs/heads/main'
         run: |
           echo "Making curl call to Netlify build hook"
           curl -X POST -d '{}' "${{ secrets.BUILD_HOOK }}"
