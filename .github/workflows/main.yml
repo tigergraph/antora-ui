@@ -42,11 +42,33 @@ jobs:
         run: npm ci --no-audit
 
       # Lints and builds the bundle so a broken gulp/lint cannot merge. This
-      # is the required `build` check. It does not publish anything.
+      # is the required `build` check. On main it also acts as a smoke test
+      # that the branch still builds after a merge. It does not publish.
       - name: Build UI bundle
         run: npx gulp bundle
 
+      # Catch the common mistake in the "contributor commits the bundle" model:
+      # src/ changed but build/ui-bundle.zip was not rebuilt, so the docs would
+      # ship stale styling. We cannot compare the zip itself: it stores file
+      # timestamps (never byte-identical) and image minification differs
+      # between a contributor's Mac and this Linux runner (unzip-compare would
+      # false-fail). Checking the PR file list is reliable and not flaky.
+      - name: Ensure bundle was rebuilt
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin "${{ github.base_ref }}"
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          if echo "$changed" | grep -q '^src/' && ! echo "$changed" | grep -qx 'build/ui-bundle.zip'; then
+            echo "::error::src/ changed but build/ui-bundle.zip was not rebuilt. Run 'npx gulp bundle' and commit the updated bundle."
+            exit 1
+          fi
+
+      # Only useful on PRs, for reviewers to download and preview. The docs
+      # sites read the committed zip from main, not this artifact, so there is
+      # no reason to upload it on a push to main.
       - name: Upload bundle artifact
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v6
         with:
           name: ui-bundle
