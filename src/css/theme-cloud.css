@@ -365,11 +365,11 @@ body.theme-cloud {
 .theme-cloud .nav-endpoint {
   display: inline-block;
   vertical-align: top;
-  /* Selecting an endpoint bolds its label, and Inter 600 sets up to 3% wider than
-     400. An unselected label therefore lays out in a box tightened by that much,
-     so it already breaks where the bold version will and clicking never reflows
-     a one-line name into two. */
-  max-width: calc((100% - 2.875rem) / 1.032);
+  /* Selecting an endpoint bolds its label, and bold sets wider, so the label lays
+     out in the width its bold self needs and breaks the same way in both states.
+     The expansion is per string, so 01-nav.js measures each label and sets
+     --bold-ratio; the fallback here is Inter's widest 400 -> 600 expansion. */
+  max-width: calc((100% - 2.875rem) / var(--bold-ratio, 1.031));
   line-height: 1.3;
 }
 

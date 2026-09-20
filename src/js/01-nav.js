@@ -17,6 +17,17 @@
   var originalPageItem = currentPageItem
   if (currentPageItem) activateCurrentPath(currentPageItem)
   restoreMenuScroll()
+  sizeEndpointLabels()
+  revealCurrentPageItem()
+  // the fallback face measures differently, so redo both once the webfont lands,
+  // unless the reader has meanwhile scrolled the menu somewhere of their own
+  if (document.fonts && document.fonts.ready) {
+    var settledScroll = menuPanel.scrollTop
+    document.fonts.ready.then(function () {
+      sizeEndpointLabels()
+      if (menuPanel.scrollTop === settledScroll) revealCurrentPageItem()
+    })
+  }
 
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
     // closest() resolves the nav-item whether or not the theme-cloud .nav-row
@@ -149,6 +160,51 @@
       try {
         window.sessionStorage.setItem(key, menuPanel.scrollTop)
       } catch (e) {}
+    })
+  }
+
+  // A link in the body of a page can land on an entry that the carried-over scroll
+  // position leaves off screen, so the menu looks like nothing is selected. Only
+  // that case scrolls, and only far enough to bring the entry inside the panel:
+  // an entry clicked in the menu is on screen already, so the menu stays put.
+  function revealCurrentPageItem () {
+    if (!currentPageItem) return
+    // the entry's own row, so a group with many children is not measured whole
+    var row = currentPageItem.querySelector('.nav-row, .nav-link') || currentPageItem
+    var rect = row.getBoundingClientRect()
+    var panel = menuPanel.getBoundingClientRect()
+    var margin = 24 // clear of the edge, where the entry reads as cut off
+    if (rect.top < panel.top + margin) {
+      menuPanel.scrollTop -= panel.top + margin - rect.top
+    } else if (rect.bottom > panel.bottom - margin) {
+      menuPanel.scrollTop += rect.bottom - panel.bottom + margin
+    }
+  }
+
+  // Becoming the current page bolds an API endpoint label, and bold sets wider,
+  // so a label that just fits on one line can reflow onto two. How much wider
+  // depends on the string (1-3% in Inter), which no single CSS fudge covers, so
+  // every label is measured in both weights and publishes its own ratio. The
+  // stylesheet lays the label out in the width its bold self needs, keeping the
+  // line breaks identical whether or not it is current.
+  function sizeEndpointLabels () {
+    var labels = find(menuPanel, '.nav-endpoint')
+    if (!labels.length) return
+    var canvas = document.createElement('canvas')
+    if (!canvas.getContext) return
+    var ruler = canvas.getContext('2d')
+    var measure = function (weight, font, text) {
+      ruler.font = weight + ' ' + font
+      return ruler.measureText(text).width
+    }
+    labels.forEach(function (label) {
+      var style = window.getComputedStyle(label)
+      var font = style.fontSize + ' ' + style.fontFamily
+      var bold = style.getPropertyValue('--body-font-weight-bold').trim() || '600'
+      var text = label.textContent
+      var plain = measure('400', font, text)
+      if (!plain) return
+      label.style.setProperty('--bold-ratio', (measure(bold, font, text) / plain).toFixed(4))
     })
   }
 
