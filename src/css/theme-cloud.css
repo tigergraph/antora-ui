@@ -113,6 +113,43 @@ body.theme-cloud {
 
 .theme-cloud .toolbar {
   top: 63px;
+  background-color: var(--body-background);
+}
+
+/* ---- Section tabs: share the toolbar row instead of adding a third bar ---- */
+.theme-cloud .nav-tabs {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  gap: 1.25rem;
+  height: 100%;
+  padding: 0 0.75rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.theme-cloud .nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.theme-cloud .nav-tab {
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
+  font-size: calc(14 / var(--rem-base) * 1rem);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.theme-cloud .nav-tab:hover {
+  color: var(--color-text-strong);
+}
+
+.theme-cloud .nav-tab.is-active {
+  border-bottom-color: var(--color-orange);
+  color: var(--color-text-strong);
+  font-weight: var(--body-font-weight-bold);
 }
 
 .theme-cloud .nav-container {
@@ -221,6 +258,23 @@ body.theme-cloud {
   transform: rotate(0);
 }
 
+/* endpoint groups title their endpoints instead of collapsing them, so their
+   list stays open whatever is-active the nav script sets */
+.theme-cloud .nav-item.is-api-group > .nav-list {
+  display: block;
+}
+
+/* a quieter label than the page links around it, since it is only a title */
+.theme-cloud .nav-item.is-api-group > .nav-row > .nav-text {
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  color: var(--color-text-subtle);
+  font-size: calc(11 / var(--rem-base) * 1rem);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
 /* depth 1 aligns with the component title; each level indents 0.75rem */
 .theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-link,
 .theme-cloud .nav-item[data-depth="1"] > .nav-row > .nav-text { padding-left: 0.75rem; }
@@ -261,7 +315,8 @@ body.theme-cloud {
   background: transparent;
 }
 
-.theme-cloud .nav-item:not(.is-current-page) > .nav-row:hover {
+/* endpoint group titles are skipped: there is nothing to click on them */
+.theme-cloud .nav-item:not(.is-current-page):not(.is-api-group) > .nav-row:hover {
   background: var(--navbar-menu_hover-background);
 }
 
@@ -274,6 +329,35 @@ body.theme-cloud {
 .theme-cloud .is-current-page > .nav-row > .nav-link,
 .theme-cloud .is-current-page > .nav-row > .nav-text {
   font-weight: var(--body-font-weight-bold);
+}
+
+/* API reference nav: HTTP verb in front of the endpoint label */
+.theme-cloud .nav-method {
+  display: inline-block;
+  min-width: 2.5rem;
+  margin-right: 0.375rem;
+  color: var(--color-text-subtle);
+  font-family: var(--monospace-font-family);
+  font-size: calc(10 / var(--rem-base) * 1rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.theme-cloud .nav-method[data-method="GET"] {
+  color: var(--note-color);
+}
+
+.theme-cloud .nav-method[data-method="POST"] {
+  color: var(--tip-color);
+}
+
+.theme-cloud .nav-method[data-method="PUT"],
+.theme-cloud .nav-method[data-method="PATCH"] {
+  color: var(--warning-color);
+}
+
+.theme-cloud .nav-method[data-method="DELETE"] {
+  color: var(--caution-color);
 }
 
 .theme-cloud .nav-panel-explore .context {
@@ -358,6 +442,12 @@ body.theme-cloud {
 
 .theme-cloud .doc pre {
   font-size: calc(14 / var(--rem-base) * 1rem);
+}
+
+/* API reference request line: long paths wrap instead of scrolling out of view */
+.theme-cloud .doc .api-request pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .theme-cloud .doc .admonitionblock .paragraph {
