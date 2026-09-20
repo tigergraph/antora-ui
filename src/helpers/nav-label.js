@@ -10,5 +10,9 @@ module.exports = (content) => {
   const text = content == null ? '' : String(content)
   const match = METHOD_LABEL.exec(text)
   if (!match) return text
-  return '<span class="nav-method" data-method="' + match[1] + '">' + match[1] + '</span>' + match[2]
+  // the label is its own box so a long name wraps under itself, not the badge
+  return (
+    '<span class="nav-method" data-method="' + match[1] + '">' + match[1] + '</span>' +
+    '<span class="nav-endpoint">' + match[2] + '</span>'
+  )
 }
