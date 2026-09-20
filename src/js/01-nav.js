@@ -15,12 +15,8 @@
 
   var currentPageItem = menuPanel.querySelector('.is-current-page')
   var originalPageItem = currentPageItem
-  if (currentPageItem) {
-    activateCurrentPath(currentPageItem)
-    scrollItemToMidpoint(menuPanel, currentPageItem.querySelector('.nav-link'))
-  } else {
-    menuPanel.scrollTop = 0
-  }
+  if (currentPageItem) activateCurrentPath(currentPageItem)
+  restoreMenuScroll()
 
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
     // closest() resolves the nav-item whether or not the theme-cloud .nav-row
@@ -75,7 +71,6 @@
     navItem.classList.add('is-current-page')
     currentPageItem = navItem
     activateCurrentPath(navItem)
-    scrollItemToMidpoint(menuPanel, navLink)
   }
 
   if (menuPanel.querySelector('.nav-link[href^="#"]')) {
@@ -131,12 +126,30 @@
     e.stopPropagation()
   }
 
-  function scrollItemToMidpoint (panel, el) {
-    var rect = panel.getBoundingClientRect()
-    var effectiveHeight = rect.height
-    var navStyle = window.getComputedStyle(nav)
-    if (navStyle.position === 'sticky') effectiveHeight -= rect.top - parseFloat(navStyle.top)
-    panel.scrollTop = Math.max(0, (el.getBoundingClientRect().height - effectiveHeight) * 0.5 + el.offsetTop)
+  // The menu never scrolls itself to the current page; it simply carries its
+  // position across page loads so following a link leaves it visually still.
+  // The key is the first link's absolute URL, which identifies the menu, so a
+  // different component or tab starts at the top instead of a stale offset.
+  function menuScrollKey () {
+    var firstLink = menuPanel.querySelector('.nav-link')
+    return firstLink ? 'nav-scroll:' + firstLink.href : null
+  }
+
+  function restoreMenuScroll () {
+    var key = menuScrollKey()
+    if (key) {
+      try {
+        var saved = window.sessionStorage.getItem(key)
+        if (saved) menuPanel.scrollTop = parseFloat(saved)
+      } catch (e) {}
+    }
+    // pagehide also covers the back/forward cache, where unload never fires
+    window.addEventListener('pagehide', function () {
+      if (!key) return
+      try {
+        window.sessionStorage.setItem(key, menuPanel.scrollTop)
+      } catch (e) {}
+    })
   }
 
   function find (from, selector) {
