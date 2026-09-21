@@ -4,8 +4,23 @@
   display: flex;
   align-items: center;
   flex: none;
+  gap: 0.5rem;
   /* nudge down so the control optically aligns with the first line of the page title */
   margin-top: 0.35rem;
+}
+
+/* Postman's hosted button is a fixed-size asset, so match the copy control's
+   height rather than restyling it. */
+.theme-cloud .page-actions-postman {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.theme-cloud .page-actions-postman img {
+  display: block;
+  width: auto;
+  height: 2rem;
 }
 
 .theme-cloud .page-actions-control {
@@ -185,5 +200,9 @@
 
   .theme-cloud .page-actions-copy {
     padding: 0.45rem;
+  }
+
+  .theme-cloud .page-actions-postman img {
+    height: 1.75rem;
   }
 }
