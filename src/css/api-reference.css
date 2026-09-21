@@ -535,15 +535,17 @@
 }
 
 /* The marks are masks rather than images so each row can tint its own icon,
-   which is what lets hover and selection carry the icon along with the label. */
+   which is what lets hover and selection carry the icon along with the label.
+   Every mark is drawn on a 24x24 canvas with its artwork centred and optically
+   sized, so this one box keeps all of them the same size and baseline. */
 .theme-cloud .api-language-icon {
   background: currentcolor;
   flex: none;
-  height: 0.95rem;
+  height: 1.2rem;
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: contain;
-  width: 0.95rem;
+  width: 1.2rem;
 }
 
 .theme-cloud .api-language-icon[data-language-icon="curl"] {
