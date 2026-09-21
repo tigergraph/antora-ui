@@ -688,10 +688,9 @@
 }
 
 /*
- * Syntax palette sampled from the Mintlify reference, which colours by token
- * role rather than by language: keywords and operators red, strings navy,
- * called functions purple, literals and built-ins blue, parameters rust.
- * Identifiers and punctuation stay in the body colour.
+ * Syntax palette colours by token role rather than by language: keywords and
+ * operators red, strings navy, called functions purple, literals and built-ins
+ * blue, parameters rust. Identifiers and punctuation stay in the body colour.
  */
 .theme-cloud .api-code-body .hljs-attr,
 .theme-cloud .api-code-body .hljs-property,
