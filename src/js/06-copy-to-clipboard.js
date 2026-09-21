@@ -6,7 +6,13 @@
   var TRAILING_SPACE_RX = / +$/gm
   var config = (document.getElementById('site-script') || { dataset: {} }).dataset
 
-  ;[].slice.call(document.querySelectorAll('.doc pre.highlight, .doc .literalblock pre')).forEach(function (pre) {
+  // The cloud theme gives every code block the same copy control, including
+  // blocks with no language, which carry no <code> of their own to copy from.
+  var cloudTheme = document.documentElement.classList.contains('theme-cloud')
+  var selector = '.doc pre.highlight, .doc .literalblock pre'
+  if (cloudTheme) selector += ', .doc .listingblock pre:not(.highlight)'
+
+  ;[].slice.call(document.querySelectorAll(selector)).forEach(function (pre) {
     var code, language, lang, copy, toast, toolbox
     if (pre.classList.contains('highlight')) {
       code = pre.querySelector('code')
@@ -22,6 +28,10 @@
       ;(code = document.createElement('code')).className = 'language-console hljs'
       code.dataset.lang = 'console'
       code.appendChild(pre.firstChild)
+      pre.appendChild(code)
+    } else if (cloudTheme) {
+      ;(code = document.createElement('code')).className = 'source-text'
+      while (pre.firstChild) code.appendChild(pre.firstChild)
       pre.appendChild(code)
     } else {
       return
