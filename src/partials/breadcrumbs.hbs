@@ -3,7 +3,8 @@
   <ul>
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li><a href="{{{relativize ./url}}}">{{{./title}}}{{#unless (eq ./displayVersion 'default')}} {{{./displayVersion}}}{{/unless}}</a></li>
+    {{! the cloud components are unversioned and label themselves "default", which reads as a version to anyone else }}
+    <li><a href="{{{relativize ./url}}}">{{{./title}}}{{#unless (and (is-cloud-theme @root.page) (eq ./displayVersion 'default'))}} {{{./displayVersion}}}{{/unless}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}

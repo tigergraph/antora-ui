@@ -3,6 +3,7 @@
 
   var sidebar = document.querySelector('aside.toc.sidebar')
   if (!sidebar) return
+  var cloudTheme = document.documentElement.classList.contains('theme-cloud')
   if (document.querySelector('body.-toc')) return sidebar.parentNode.removeChild(sidebar)
   var levels = parseInt(sidebar.dataset.levels || 2, 10)
   if (levels < 0) return
@@ -58,12 +59,32 @@
   })
 
   function onScroll () {
-    // Activate the last heading that has reached the reading line (about a
-    // quarter of the way down the viewport). Using article.offsetTop as that
-    // line (Antora default) keeps the previous TOC item highlighted while you
-    // are still looking at the current heading.
+    var scrolledBy = window.pageYOffset
     var buffer = getNumericStyleVal(document.documentElement, 'fontSize') * 1.15
-    var ceil = Math.max(article.getBoundingClientRect().top, 0) + window.innerHeight * 0.28
+    // Antora measures against the top of the article, which keeps the previous
+    // entry highlighted while you are already reading the next heading. The
+    // cloud theme activates at a reading line a quarter down the viewport
+    // instead; other components keep Antora's behaviour, including its
+    // separate handling of the last screenful.
+    var readingLine = Math.max(article.getBoundingClientRect().top, 0) + window.innerHeight * 0.28
+    var ceil = cloudTheme ? readingLine : article.offsetTop
+    if (!cloudTheme && scrolledBy && window.innerHeight + scrolledBy + 2 >= document.documentElement.scrollHeight) {
+      lastActiveFragment = Array.isArray(lastActiveFragment) ? lastActiveFragment : Array(lastActiveFragment || 0)
+      var activeFragments = []
+      var lastIdx = headings.length - 1
+      headings.forEach(function (heading, idx) {
+        var fragment = '#' + heading.id
+        if (idx === lastIdx || heading.getBoundingClientRect().top + getNumericStyleVal(heading, 'paddingTop') > ceil) {
+          activeFragments.push(fragment)
+          if (lastActiveFragment.indexOf(fragment) < 0) links[fragment].classList.add('is-active')
+        } else if (~lastActiveFragment.indexOf(fragment)) {
+          links[lastActiveFragment.shift()].classList.remove('is-active')
+        }
+      })
+      list.scrollTop = list.scrollHeight - list.offsetHeight
+      lastActiveFragment = activeFragments.length > 1 ? activeFragments : activeFragments[0]
+      return
+    }
     if (Array.isArray(lastActiveFragment)) {
       lastActiveFragment.forEach(function (fragment) {
         links[fragment].classList.remove('is-active')

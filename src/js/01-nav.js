@@ -13,20 +13,28 @@
   if (!menuPanel) return
   var nav = navContainer.querySelector('.nav')
 
+  var cloudTheme = document.documentElement.classList.contains('theme-cloud')
+
   var currentPageItem = menuPanel.querySelector('.is-current-page')
   var originalPageItem = currentPageItem
   if (currentPageItem) activateCurrentPath(currentPageItem)
-  restoreMenuScroll()
-  sizeEndpointLabels()
-  revealCurrentPageItem()
-  // the fallback face measures differently, so redo both once the webfont lands,
-  // unless the reader has meanwhile scrolled the menu somewhere of their own
-  if (document.fonts && document.fonts.ready) {
-    var settledScroll = menuPanel.scrollTop
-    document.fonts.ready.then(function () {
-      sizeEndpointLabels()
-      if (menuPanel.scrollTop === settledScroll) revealCurrentPageItem()
-    })
+  if (cloudTheme) {
+    restoreMenuScroll()
+    sizeEndpointLabels()
+    revealCurrentPageItem()
+    // the fallback face measures differently, so redo both once the webfont lands,
+    // unless the reader has meanwhile scrolled the menu somewhere of their own
+    if (document.fonts && document.fonts.ready) {
+      var settledScroll = menuPanel.scrollTop
+      document.fonts.ready.then(function () {
+        sizeEndpointLabels()
+        if (menuPanel.scrollTop === settledScroll) revealCurrentPageItem()
+      })
+    }
+  } else if (currentPageItem) {
+    scrollItemToMidpoint(menuPanel, currentPageItem.querySelector('.nav-link'))
+  } else {
+    menuPanel.scrollTop = 0
   }
 
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
@@ -82,6 +90,7 @@
     navItem.classList.add('is-current-page')
     currentPageItem = navItem
     activateCurrentPath(navItem)
+    if (!cloudTheme) scrollItemToMidpoint(menuPanel, navLink)
   }
 
   if (menuPanel.querySelector('.nav-link[href^="#"]')) {
@@ -137,8 +146,18 @@
     e.stopPropagation()
   }
 
-  // The menu never scrolls itself to the current page; it simply carries its
-  // position across page loads so following a link leaves it visually still.
+  // Antora's default: centre the current page in the menu on load. Only the
+  // components outside the cloud theme still use it.
+  function scrollItemToMidpoint (panel, el) {
+    var rect = panel.getBoundingClientRect()
+    var effectiveHeight = rect.height
+    var navStyle = window.getComputedStyle(nav)
+    if (navStyle.position === 'sticky') effectiveHeight -= rect.top - parseFloat(navStyle.top)
+    panel.scrollTop = Math.max(0, (el.getBoundingClientRect().height - effectiveHeight) * 0.5 + el.offsetTop)
+  }
+
+  // The cloud theme's menu never scrolls itself to the current page; it simply
+  // carries its position across page loads so following a link leaves it still.
   // The key is the first link's absolute URL, which identifies the menu, so a
   // different component or tab starts at the top instead of a stale offset.
   function menuScrollKey () {

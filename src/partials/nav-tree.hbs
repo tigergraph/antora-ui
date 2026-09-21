@@ -1,17 +1,17 @@
 {{#if navigation.length}}
 <ul class="nav-list">
   {{#each navigation}}
-  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#if (is-api-group this)}} is-api-group{{/if}}" data-depth="{{or ../level 0}}">
+  <li class="nav-item{{#if (eq ./url @root.page.url)}} is-current-page{{/if}}{{#if (is-api-group this @root.page)}} is-api-group{{/if}}" data-depth="{{or ../level 0}}">
     {{#if ./content}}
     {{#if (is-cloud-theme @root.page)}}<div class="nav-row">{{/if}}
     {{#if ./url}}
     <a class="nav-link" href="
       {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
-      {{~else}}{{{./url}}}{{~/if}}">{{{nav-label ./content}}}</a>
+      {{~else}}{{{./url}}}{{~/if}}">{{{nav-label ./content @root.page}}}</a>
     {{else}}
     <span class="nav-text">{{{./content}}}</span>
     {{/if}}
-    {{#if (and ./items.length (not (is-api-group this)))}}
+    {{#if (and ./items.length (not (is-api-group this @root.page)))}}
     <button class="nav-item-toggle">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
