@@ -64,10 +64,9 @@
   --api-code-literal: #214fa8;
   --api-code-param: #8a3e16;
   --api-code-json-value: #2e6230;
-  /* Status green, not brand orange: orange already reads as link/active/focus
-     in this theme, and 2xx needs to stay distinct from 4xx and 5xx. */
-  --api-get: var(--tip-color);
-  --api-get-tint: var(--tip-tint);
+  /* Brand orange, darkened: the tab label sets at 12px, where full-strength
+     --color-orange falls under the contrast floor on white. */
+  --api-accent: #aa4f0e;
   --api-panel-width: calc(448 / var(--rem-base) * 1rem / 0.95);
   --api-radius: 0.75rem;
 }
@@ -783,11 +782,11 @@
 }
 
 .theme-cloud .api-response-tabs button[aria-selected="true"] {
-  color: var(--api-get);
+  color: var(--api-accent);
 }
 
 .theme-cloud .api-response-tabs button[aria-selected="true"]::after {
-  background: var(--api-get);
+  background: var(--api-accent);
   bottom: 0;
   content: "";
   height: 2px;
