@@ -1,4 +1,18 @@
 {{!-- Add additional meta tags here --}}
+<!-- Google Consent Mode v2 default (must load BEFORE GTM) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -7,21 +21,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PXZZ7SP');</script>
 <!-- End Google Tag Manager -->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-{{!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LVRWGMQK4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1LVRWGMQK4');
-</script> --}}
-<!-- End Google Tag Manager -->
-
 <meta property="og:title" content="{{#with (or page.attributes.ogtitle page.title) }}{{{detag this}}}{{/with}} - {{#with page.component.title}}{{{detag this}}}{{/with}}" />
-<meta property="og:image" href="{{{uiRootPath}}}/img/og-image.png" content="https://i.ibb.co/7bkxZJW/og-image.png">
+<meta property="og:image" content="https://www.tigergraph.com/docs/_/img/og-image.png">
+<meta property="og:image:secure_url" content="https://www.tigergraph.com/docs/_/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TigerGraph Logo against an orange gradient background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.tigergraph.com/docs/_/img/og-image.png">
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.tigergraph.com/docs/{{ page.url }}">
+<meta property="og:url" content="{{{page.canonicalUrl}}}">
 {{#with (or page.description 'The Only Scalable Platform for Analytics and ML on Connected Data') }}
     <meta property="og:description" content="{{this}}">
 {{/with}}
