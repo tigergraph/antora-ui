@@ -1,0 +1,11 @@
+{{#with (nav-sections page)}}
+{{#if this.enabled}}
+<nav class="nav-tabs" aria-label="Documentation sections">
+  {{#each this.tabs}}
+  <a class="nav-tab{{#if ./active}} is-active{{/if}}" href="{{{relativize ./url}}}"{{#if ./active}} aria-current="true"{{/if}}>{{./title}}</a>
+  {{/each}}
+</nav>
+{{else}}
+{{> breadcrumbs page=@root.page}}
+{{/if}}
+{{/with}}

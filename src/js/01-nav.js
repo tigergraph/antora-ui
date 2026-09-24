@@ -13,10 +13,25 @@
   if (!menuPanel) return
   var nav = navContainer.querySelector('.nav')
 
+  var cloudTheme = document.documentElement.classList.contains('theme-cloud')
+
   var currentPageItem = menuPanel.querySelector('.is-current-page')
   var originalPageItem = currentPageItem
-  if (currentPageItem) {
-    activateCurrentPath(currentPageItem)
+  if (currentPageItem) activateCurrentPath(currentPageItem)
+  if (cloudTheme) {
+    restoreMenuScroll()
+    sizeEndpointLabels()
+    revealCurrentPageItem()
+    // the fallback face measures differently, so redo both once the webfont lands,
+    // unless the reader has meanwhile scrolled the menu somewhere of their own
+    if (document.fonts && document.fonts.ready) {
+      var settledScroll = menuPanel.scrollTop
+      document.fonts.ready.then(function () {
+        sizeEndpointLabels()
+        if (menuPanel.scrollTop === settledScroll) revealCurrentPageItem()
+      })
+    }
+  } else if (currentPageItem) {
     scrollItemToMidpoint(menuPanel, currentPageItem.querySelector('.nav-link'))
   } else {
     menuPanel.scrollTop = 0
@@ -75,7 +90,7 @@
     navItem.classList.add('is-current-page')
     currentPageItem = navItem
     activateCurrentPath(navItem)
-    scrollItemToMidpoint(menuPanel, navLink)
+    if (!cloudTheme) scrollItemToMidpoint(menuPanel, navLink)
   }
 
   if (menuPanel.querySelector('.nav-link[href^="#"]')) {
@@ -131,12 +146,85 @@
     e.stopPropagation()
   }
 
+  // Antora's default: centre the current page in the menu on load. Only the
+  // components outside the cloud theme still use it.
   function scrollItemToMidpoint (panel, el) {
     var rect = panel.getBoundingClientRect()
     var effectiveHeight = rect.height
     var navStyle = window.getComputedStyle(nav)
     if (navStyle.position === 'sticky') effectiveHeight -= rect.top - parseFloat(navStyle.top)
     panel.scrollTop = Math.max(0, (el.getBoundingClientRect().height - effectiveHeight) * 0.5 + el.offsetTop)
+  }
+
+  // The cloud theme's menu never scrolls itself to the current page; it simply
+  // carries its position across page loads so following a link leaves it still.
+  // The key is the first link's absolute URL, which identifies the menu, so a
+  // different component or tab starts at the top instead of a stale offset.
+  function menuScrollKey () {
+    var firstLink = menuPanel.querySelector('.nav-link')
+    return firstLink ? 'nav-scroll:' + firstLink.href : null
+  }
+
+  function restoreMenuScroll () {
+    var key = menuScrollKey()
+    if (key) {
+      try {
+        var saved = window.sessionStorage.getItem(key)
+        if (saved) menuPanel.scrollTop = parseFloat(saved)
+      } catch (e) {}
+    }
+    // pagehide also covers the back/forward cache, where unload never fires
+    window.addEventListener('pagehide', function () {
+      if (!key) return
+      try {
+        window.sessionStorage.setItem(key, menuPanel.scrollTop)
+      } catch (e) {}
+    })
+  }
+
+  // A link in the body of a page can land on an entry that the carried-over scroll
+  // position leaves off screen, so the menu looks like nothing is selected. Only
+  // that case scrolls, and only far enough to bring the entry inside the panel:
+  // an entry clicked in the menu is on screen already, so the menu stays put.
+  function revealCurrentPageItem () {
+    if (!currentPageItem) return
+    // the entry's own row, so a group with many children is not measured whole
+    var row = currentPageItem.querySelector('.nav-row, .nav-link') || currentPageItem
+    var rect = row.getBoundingClientRect()
+    var panel = menuPanel.getBoundingClientRect()
+    var margin = 24 // clear of the edge, where the entry reads as cut off
+    if (rect.top < panel.top + margin) {
+      menuPanel.scrollTop -= panel.top + margin - rect.top
+    } else if (rect.bottom > panel.bottom - margin) {
+      menuPanel.scrollTop += rect.bottom - panel.bottom + margin
+    }
+  }
+
+  // Becoming the current page bolds an API endpoint label, and bold sets wider,
+  // so a label that just fits on one line can reflow onto two. How much wider
+  // depends on the string (1-3% in Inter), which no single CSS fudge covers, so
+  // every label is measured in both weights and publishes its own ratio. The
+  // stylesheet lays the label out in the width its bold self needs, keeping the
+  // line breaks identical whether or not it is current.
+  function sizeEndpointLabels () {
+    var labels = find(menuPanel, '.nav-endpoint')
+    if (!labels.length) return
+    var canvas = document.createElement('canvas')
+    if (!canvas.getContext) return
+    var ruler = canvas.getContext('2d')
+    var measure = function (weight, font, text) {
+      ruler.font = weight + ' ' + font
+      return ruler.measureText(text).width
+    }
+    labels.forEach(function (label) {
+      var style = window.getComputedStyle(label)
+      var font = style.fontSize + ' ' + style.fontFamily
+      var bold = style.getPropertyValue('--body-font-weight-bold').trim() || '600'
+      var text = label.textContent
+      var plain = measure('400', font, text)
+      if (!plain) return
+      label.style.setProperty('--bold-ratio', (measure(bold, font, text) / plain).toFixed(4))
+    })
   }
 
   function find (from, selector) {

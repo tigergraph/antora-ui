@@ -4,7 +4,9 @@
     {{#with @root.page.componentVersion}}
     <h3 class="title"><a href="{{{relativize ./url}}}">{{./title}}</a></h3>
     {{/with}}
-{{> nav-tree navigation=this}}
+{{#with (nav-sections @root.page)}}
+{{> nav-tree navigation=this.groups level=this.level}}
+{{/with}}
   </nav>
 </div>
 {{/with}}

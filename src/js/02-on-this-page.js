@@ -3,6 +3,7 @@
 
   var sidebar = document.querySelector('aside.toc.sidebar')
   if (!sidebar) return
+  var cloudTheme = document.documentElement.classList.contains('theme-cloud')
   if (document.querySelector('body.-toc')) return sidebar.parentNode.removeChild(sidebar)
   var levels = parseInt(sidebar.dataset.levels || 2, 10)
   if (levels < 0) return
@@ -60,8 +61,14 @@
   function onScroll () {
     var scrolledBy = window.pageYOffset
     var buffer = getNumericStyleVal(document.documentElement, 'fontSize') * 1.15
-    var ceil = article.offsetTop
-    if (scrolledBy && window.innerHeight + scrolledBy + 2 >= document.documentElement.scrollHeight) {
+    // Antora measures against the top of the article, which keeps the previous
+    // entry highlighted while you are already reading the next heading. The
+    // cloud theme activates at a reading line a quarter down the viewport
+    // instead; other components keep Antora's behaviour, including its
+    // separate handling of the last screenful.
+    var readingLine = Math.max(article.getBoundingClientRect().top, 0) + window.innerHeight * 0.28
+    var ceil = cloudTheme ? readingLine : article.offsetTop
+    if (!cloudTheme && scrolledBy && window.innerHeight + scrolledBy + 2 >= document.documentElement.scrollHeight) {
       lastActiveFragment = Array.isArray(lastActiveFragment) ? lastActiveFragment : Array(lastActiveFragment || 0)
       var activeFragments = []
       var lastIdx = headings.length - 1
