@@ -5,7 +5,9 @@
 {{#with @root.page.url}}
 <div class="page-actions is-before-toc" data-md-url="{{{relativize (md-url this)}}}">
   {{#with (lookup @root.page.attributes "postman-url")}}
-  <a class="page-actions-postman" href="{{this}}" target="_blank" rel="noopener">
+  {{!-- Asciidoctor already escapes & in header attribute values, so escaping again here
+        would send Postman &amp;source= instead of &source=. --}}
+  <a class="page-actions-postman" href="{{{this}}}" target="_blank" rel="noopener">
     <img src="https://run.pstmn.io/button.svg" alt="Run in Postman" width="128" height="32">
   </a>
   {{/with}}
