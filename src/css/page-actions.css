@@ -9,38 +9,18 @@
   margin-top: 0.35rem;
 }
 
-/* Drawn locally rather than loaded from run.pstmn.io, which the site CSP blocks.
-   Shares the copy control's shell so the two read as one row. */
+/* Postman's button is a fixed-size asset, so match the copy control's
+   height rather than restyling it. */
 .theme-cloud .page-actions-postman {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.7rem;
-  border: 1px solid var(--panel-border-color);
-  border-radius: var(--page-actions-radius);
-  background: var(--color-white);
-  color: var(--doc-font-color);
-  font-size: var(--page-actions-font-size);
-  line-height: 1;
-  white-space: nowrap;
   text-decoration: none;
 }
 
-.theme-cloud .doc .page-actions-postman,
-.theme-cloud .doc .page-actions-postman:hover {
-  color: var(--doc-font-color);
-  text-decoration: none;
-}
-
-.theme-cloud .page-actions-postman:hover,
-.theme-cloud .page-actions-postman:focus-visible {
-  background: var(--color-smoke-50);
-  outline: none;
-}
-
-/* Postman's brand orange, so the mark stays recognisable without their asset. */
-.theme-cloud .page-actions-postman .page-actions-icon {
-  color: #ff6c37;
+.theme-cloud .page-actions-postman img {
+  display: block;
+  width: auto;
+  height: 2rem;
 }
 
 .theme-cloud .page-actions-control {
@@ -222,20 +202,7 @@
     padding: 0.45rem;
   }
 
-  /* icon only, matching the copy control's mobile treatment */
-  .theme-cloud .page-actions-postman span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .theme-cloud .page-actions-postman {
-    padding: 0.45rem;
+  .theme-cloud .page-actions-postman img {
+    height: 1.75rem;
   }
 }
