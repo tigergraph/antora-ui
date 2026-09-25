@@ -1,12 +1,15 @@
 {{!-- Referenced via @root so the partial works from any context (e.g. inside a {{#with}} block).
      Brand marks (Markdown, OpenAI, Claude, Cursor) are the official icons from simple-icons (CC0).
-     The Postman button must stay Postman's own hosted button.svg; it is the only form they license. --}}
+     The Postman button is their own button.svg, vendored into the bundle: the site CSP does not list
+     run.pstmn.io under img-src, so serving it from the theme is the only way it renders. --}}
 {{#unless (eq @root.page.layout '404')}}
 {{#with @root.page.url}}
 <div class="page-actions is-before-toc" data-md-url="{{{relativize (md-url this)}}}">
   {{#with (lookup @root.page.attributes "postman-url")}}
-  <a class="page-actions-postman" href="{{this}}" target="_blank" rel="noopener">
-    <img src="https://run.pstmn.io/button.svg" alt="Run in Postman" width="128" height="32">
+  {{!-- Asciidoctor already escapes & in header attribute values, so escaping again here
+        would send Postman &amp;source= instead of &source=. --}}
+  <a class="page-actions-postman" href="{{{this}}}" target="_blank" rel="noopener">
+    <img src="{{{@root.uiRootPath}}}/img/run-in-postman.svg" alt="Run in Postman" width="128" height="32">
   </a>
   {{/with}}
   <div class="page-actions-control">

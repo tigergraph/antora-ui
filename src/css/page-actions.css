@@ -9,7 +9,7 @@
   margin-top: 0.35rem;
 }
 
-/* Postman's hosted button is a fixed-size asset, so match the copy control's
+/* Postman's button is a fixed-size asset, so match the copy control's
    height rather than restyling it. */
 .theme-cloud .page-actions-postman {
   display: inline-flex;
