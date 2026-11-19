@@ -5,6 +5,11 @@
 <h1 class="page">{{{this}}}</h1>
 {{> page-actions}}
 </div>
+{{else if (has-page-actions @root.page)}}
+<div class="page-header page-header--actions">
+<h1 class="page">{{{this}}}</h1>
+{{> page-actions}}
+</div>
 {{else}}
 <h1 class="page">{{{this}}}</h1>
 {{/if}}

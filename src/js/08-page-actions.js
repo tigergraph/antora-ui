@@ -1,8 +1,8 @@
 ;(function () {
   'use strict'
 
-  // Cloud/Savanna-only. Other products never emit .page-actions markup.
-  if (!document.documentElement.classList.contains('theme-cloud')) return
+  // Runs wherever the template printed the control (Savanna, Cloud Classic, and
+  // products allow-listed in src/helpers/has-page-actions.js). Pages without it exit here.
 
   var root = document.querySelector('.page-actions')
   if (!root) return
