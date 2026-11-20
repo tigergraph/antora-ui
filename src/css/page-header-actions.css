@@ -1,0 +1,27 @@
+/* Title row for products other than Savanna/Cloud Classic that show Copy page.
+   Mirrors .doc > h1.page:first-child in doc.css, which no longer matches once
+   the title is wrapped. Savanna/Cloud Classic keep their own row in theme-cloud.css. */
+.doc > .page-header--actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.doc > .page-header--actions > h1.page {
+  font-size: calc(36 / var(--rem-base) * 1rem);
+  margin: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .doc > .page-header--actions {
+    margin-top: 2.5rem;
+  }
+}
+
+@media print {
+  .page-actions {
+    display: none;
+  }
+}
